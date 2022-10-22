@@ -1,4 +1,4 @@
 class RouteNames{
-  static const HOME = '/home';
-  static const CREATE = '/create';
+  static const home = '/home';
+  static const create = '/create';
 }
