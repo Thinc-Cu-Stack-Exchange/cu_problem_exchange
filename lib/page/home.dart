@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:cu_problem_exchange/widget/tabbar.dart';
-class Home extends StatefulWidget {
+
+class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: const [
-            Topbar(tag: 'Home'),
+      appBar: CustomTopBar(tag: 'Home',),
+      drawer: Drawer(
 
-          ],
-        ),
       ),
+      bottomNavigationBar: CustomBotBar(),
+
+      backgroundColor: Color(0xffE7E7E7),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        child : Icon(
+          Icons.add,
+        ),
+        onPressed: (){},
+        backgroundColor: Color(0xffff82dc),
+      )
     );
   }
 }
-
-
-
