@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
           Icons.add,
         ),
         onPressed: (){},
-        backgroundColor: Color(0xffff82dc),
+        backgroundColor: Color(0xffe897af),
       )
     );
   }

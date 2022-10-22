@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cu_problem_exchange/page/home.dart';
+import 'package:cu_problem_exchange/page/create.dart';
 
 void main() => runApp(MaterialApp(
     theme: ThemeData(
@@ -13,4 +14,4 @@ void main() => runApp(MaterialApp(
             foregroundColor: Colors.black),
       ),
     ),
-    home: const Create()));
+    home: const Home()));

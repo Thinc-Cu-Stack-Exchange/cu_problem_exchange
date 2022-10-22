@@ -15,20 +15,20 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: Color(0xffe897af),
       title: Container(
         decoration: BoxDecoration(
-            color: const Color(0xffffffff),
+            //color: const Color(0xffffffff),
             borderRadius: BorderRadius.circular(18),
             border: Border.all(width: 0, color: Color(0))),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+          padding: EdgeInsets.fromLTRB(0, 10, 15, 10),
           child: Text(
             tag,
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Color(0xff000000),
+              color: Color(0xffffffff),
             ),
           ),
         ),
@@ -37,7 +37,7 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
         padding: EdgeInsets.all(4),
         icon: Icon(
           Icons.menu,
-          color: Color(0xff000000),
+          color: Color(0xffffffff),
         ),
         iconSize: 20,
         onPressed: () => Scaffold.of(context).openDrawer(),
@@ -48,7 +48,7 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {},
           icon: Icon(
             Icons.search,
-            color: Color(0xff000000),
+            color: Color(0xffffffff),
           ),
           iconSize: 20,
 
@@ -58,7 +58,7 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {},
           icon: Icon(
             Icons.account_circle,
-            color: Color(0xff000000),
+            color: Color(0xffffffff),
           ),
           iconSize: 20,
         ),
@@ -81,7 +81,7 @@ class CustomBotBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
         shape: CircularNotchedRectangle(),
-        color: Color(0xffffffff),
+        color: Color(0xffe897af),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -90,6 +90,7 @@ class CustomBotBar extends StatelessWidget implements PreferredSizeWidget {
                 icon: Icon(
                   Icons.home,
                   size: 20,
+                  color: Color(0xffffffff),
                 )),
             SizedBox(
               width: 0,
@@ -99,6 +100,7 @@ class CustomBotBar extends StatelessWidget implements PreferredSizeWidget {
                 icon: Icon(
                   Icons.explore,
                   size: 20,
+                  color: Color(0xffffffff),
                 ))
           ],
         ));
