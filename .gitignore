@@ -28,3 +28,6 @@ doc/api/
 
 # IDE specific datas
 .idea/
+.idea/libraries/Dart_Packages.xml
+.idea/libraries/Dart_SDK.xml
+android/cu_problem_exchange_android.iml
