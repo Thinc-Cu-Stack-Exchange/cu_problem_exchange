@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:cu_problem_exchange/widget/tabbar.dart';
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
-class Home extends StatelessWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
 
-
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(5.0, 26.0, 12.0, 8.0),
-        child: Row(
-          children: [
-            Icon()
+      body: SafeArea(
+        child: Column(
+          children: const [
+            Topbar(tag: 'Home'),
+
           ],
         ),
       ),
     );
   }
 }
+
+
+
