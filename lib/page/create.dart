@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../route_names.dart';
+
 class Create extends GetView<CreateController> {
   const Create({super.key});
 
@@ -15,7 +17,7 @@ class Create extends GetView<CreateController> {
               children: [
                 IconButton(
                   icon: const Icon(Icons.close),
-                  onPressed: () {},
+                  onPressed: controller.closePressed,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -83,6 +85,10 @@ class Create extends GetView<CreateController> {
 class CreateController extends GetxController {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
+
+  void closePressed(){
+    Get.offNamed(RouteNames.home);
+  }
 
   @override
   void onClose() {
