@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Create extends StatelessWidget {
+class Create extends GetView<CreateController> {
   const Create({super.key});
 
   @override
@@ -30,18 +31,22 @@ class Create extends StatelessWidget {
             Expanded(
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(children: const [
+                    child: Column(children:  [
                       TextField(
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                        decoration: InputDecoration(
+                        controller: controller.titleController,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Title',
                         ),
                         maxLines: null,
                       ),
                       TextField(
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-                        decoration: InputDecoration(
+                        controller: controller.contentController,
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.normal),
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Content',
                         ),
@@ -72,5 +77,24 @@ class Create extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class CreateController extends GetxController {
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
+
+  @override
+  void onClose() {
+    titleController.dispose();
+    contentController.dispose();
+    super.onClose();
+  }
+}
+
+class CreateBinding implements Bindings{
+  @override
+  void dependencies() {
+    Get.lazyPut(() => CreateController());
   }
 }
