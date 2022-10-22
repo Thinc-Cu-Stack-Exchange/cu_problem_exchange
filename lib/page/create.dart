@@ -1,6 +1,12 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class Create extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../route_names.dart';
+
+class Create extends GetView<CreateController> {
   const Create({super.key});
 
   @override
@@ -14,7 +20,7 @@ class Create extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(Icons.close),
-                  onPressed: () {},
+                  onPressed: controller.closePressed,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -30,27 +36,39 @@ class Create extends StatelessWidget {
             Expanded(
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(children: const [
-                      TextField(
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Title',
-                        ),
-                        maxLines: null,
-                      ),
-                      TextField(
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Content',
-                        ),
-                        maxLines: null,
-                        keyboardType: TextInputType.multiline,
-                      )
-                    ]))),
+                    child: Obx(() => ListView.builder(
+                      itemCount: 2 + controller.imageList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index == 0) {
+                          return TextField(
+                            controller: controller.titleController,
+                            style: const TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Title',
+                            ),
+                            maxLines: null,
+                          );
+                        } else if (index == 1) {
+                          return TextField(
+                            controller: controller.contentController,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.normal),
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Content',
+                            ),
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
+                          );
+                        } else {
+                          return Image(image: controller.imageList[index - 2]);
+                        }
+                      },
+                    )))),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: controller.addPhotoPressed,
                 child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Row(
@@ -72,5 +90,92 @@ class Create extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class CreateController extends GetxController {
+  RxList<FileImage> imageList = RxList<FileImage>();
+
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
+
+  final bottomSheet = const ImagePickerBottomSheet();
+
+  final imagePicker = ImagePicker();
+
+  void closePressed() {
+    Get.offNamed(RouteNames.home);
+  }
+
+  void addPhotoPressed() {
+    Get.bottomSheet(bottomSheet);
+  }
+
+  void pickImageFromCamera() async {
+    XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
+    addImage(file);
+    Get.back();
+  }
+
+  void pickImageFromGallery() async {
+    XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+    addImage(file);
+    Get.back();
+  }
+
+  void addImage(XFile? file) {
+    if (file == null) {
+      return;
+    }
+
+    imageList.add(FileImage(File(file.path)));
+  }
+
+  @override
+  void onClose() {
+    titleController.dispose();
+    contentController.dispose();
+    super.onClose();
+  }
+}
+
+class CreateBinding implements Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => CreateController());
+  }
+}
+
+class ImagePickerBottomSheet extends StatelessWidget {
+  const ImagePickerBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.find<CreateController>();
+    return Ink(
+        color: context.theme.primaryColor,
+        child: Wrap(
+          children: <Widget>[
+            ListTile(
+                leading: const Icon(
+                  Icons.photo_library_outlined,
+                  color: Colors.white,
+                ),
+                title: const Text(
+                  'From Gallery',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: controller.pickImageFromGallery),
+            ListTile(
+              leading:
+                  const Icon(Icons.photo_camera_outlined, color: Colors.white),
+              title: const Text(
+                'From Camera',
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: controller.pickImageFromCamera,
+            ),
+          ],
+        ));
   }
 }
