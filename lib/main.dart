@@ -1,8 +1,10 @@
 import 'package:cu_problem_exchange/page/create.dart';
 import 'package:cu_problem_exchange/page/home.dart';
 import 'package:cu_problem_exchange/route_names.dart';
+import 'package:cu_problem_exchange/page/find.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 void main() => runApp(GetMaterialApp(
       theme: ThemeData(

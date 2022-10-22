@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -101,7 +102,6 @@ class CreateController extends GetxController {
 
   final bottomSheet = const ImagePickerBottomSheet();
 
-  final imagePicker = ImagePicker();
 
   void closePressed() {
     Get.offNamed(RouteNames.home);
@@ -109,16 +109,21 @@ class CreateController extends GetxController {
 
   void addPhotoPressed() {
     Get.bottomSheet(bottomSheet);
+    printInfo(info: "We love psls");
   }
 
   void pickImageFromCamera() async {
-    XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
-    addImage(file);
+    try {
+      XFile? file = await ImagePicker().pickImage(source: ImageSource.camera);
+      addImage(file);
+    }catch(ex){developer.log("ERROR PSLS SA LOVE SAW");
+    }
     Get.back();
   }
 
   void pickImageFromGallery() async {
-    XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
     addImage(file);
     Get.back();
   }

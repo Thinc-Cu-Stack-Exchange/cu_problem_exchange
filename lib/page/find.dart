@@ -51,6 +51,57 @@ class createRecentSearch extends StatelessWidget {
   }
 }
 
+class createResultSearch extends StatelessWidget {
+  final String textResultSearch;
+
+  createResultSearch({required this.textResultSearch});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              child: Icon(
+                Icons.history,
+                size: 20,
+              ),
+            ),
+
+            Expanded(
+              child: TextButton(
+                onPressed: () {},
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    textResultSearch,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.delete,
+                size: 20,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 class Find extends StatelessWidget {
   Find({Key? key}) : super(key: key);
   var DataSearch = ["s1", "s2", "s3"];
