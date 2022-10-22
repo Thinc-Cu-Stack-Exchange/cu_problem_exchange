@@ -4,7 +4,8 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String tag;
   final double height;
 
-  CustomTopBar({
+  const CustomTopBar({
+    super.key,
     required this.tag,
     this.height = kToolbarHeight,
   });
@@ -15,14 +16,14 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xffe897af),
+      backgroundColor: const Color(0xffe897af),
       title: Container(
         decoration: BoxDecoration(
             //color: const Color(0xffffffff),
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(width: 0, color: Color(0))),
+            border: Border.all(width: 0, color: const Color(0x00000000))),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 10, 15, 10),
+          padding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
           child: Text(
             tag,
             style: const TextStyle(
@@ -34,8 +35,8 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       leading: IconButton(
-        padding: EdgeInsets.all(4),
-        icon: Icon(
+        padding: const EdgeInsets.all(4),
+        icon: const Icon(
           Icons.menu,
           color: Color(0xffffffff),
         ),
@@ -44,19 +45,18 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           onPressed: () {},
-          icon: Icon(
+          icon: const Icon(
             Icons.search,
             color: Color(0xffffffff),
           ),
           iconSize: 20,
-
         ),
         IconButton(
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           onPressed: () {},
-          icon: Icon(
+          icon: const Icon(
             Icons.account_circle,
             color: Color(0xffffffff),
           ),
@@ -70,7 +70,8 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
 class CustomBotBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
 
-  CustomBotBar({
+  const CustomBotBar({
+    super.key,
     this.height = kToolbarHeight,
   });
 
@@ -80,24 +81,24 @@ class CustomBotBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        color: Color(0xffe897af),
+        shape: const CircularNotchedRectangle(),
+        color: const Color(0xffe897af),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.home,
                   size: 20,
                   color: Color(0xffffffff),
                 )),
-            SizedBox(
+            const SizedBox(
               width: 0,
             ),
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.explore,
                   size: 20,
                   color: Color(0xffffffff),
