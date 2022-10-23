@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 
-class createRecentSearch extends StatelessWidget {
+class CreateRecentSearch extends StatelessWidget {
   final String textRecentSearch;
 
-  const createRecentSearch({super.key, required this.textRecentSearch});
+  const CreateRecentSearch({super.key, required this.textRecentSearch});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,6 @@ class createRecentSearch extends StatelessWidget {
                 size: 20,
               ),
             ),
-
             Expanded(
               child: TextButton(
                 onPressed: () {},
@@ -53,10 +52,11 @@ class createRecentSearch extends StatelessWidget {
   }
 }
 
-class createResultSearch extends StatelessWidget {
+class     CreateResultSearch extends StatelessWidget {
   final String textResultSearch;
 
-  const createResultSearch({super.key, required this.textResultSearch});
+  const CreateResultSearch({super.key, required this.textResultSearch});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -73,7 +73,6 @@ class createResultSearch extends StatelessWidget {
                 size: 20,
               ),
             ),
-
             Expanded(
               child: TextButton(
                 onPressed: () {},
@@ -96,11 +95,10 @@ class createResultSearch extends StatelessWidget {
   }
 }
 
-
 class Find extends StatelessWidget {
   Find({Key? key}) : super(key: key);
-  var DataSearch = ["s1", "s2", "s3"];
-  var DataBase = ["a", "b", "c", "cca", "bc", "ac"];
+  final dataSearch = ["s1", "s2", "s3"];
+  final dataBase = ["a", "b", "c", "cca", "bc", "ac"];
 
   final inputController = TextEditingController();
 
@@ -146,8 +144,8 @@ class Find extends StatelessWidget {
               padding: const EdgeInsets.all(3),
               child: Column(
                 children: [
-                  createRecentSearch(textRecentSearch: DataSearch[0]),
-                  createRecentSearch(textRecentSearch: DataSearch[1])
+                  CreateRecentSearch(textRecentSearch: dataSearch[0]),
+                  CreateRecentSearch(textRecentSearch: dataSearch[1])
                 ],
               ),
             ),
