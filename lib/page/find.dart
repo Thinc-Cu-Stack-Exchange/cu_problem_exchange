@@ -3,6 +3,8 @@ import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../route_names.dart';
+
 class CreateRecentSearch extends StatelessWidget {
   final String textRecentSearch;
 
@@ -101,8 +103,6 @@ class Find extends GetView<FindController> {
   final dataSearch = ["s1", "s2", "s3"];
   final dataBase = ["a", "b", "c", "cca", "bc", "ac"];
 
-  final inputController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,17 +111,17 @@ class Find extends GetView<FindController> {
         color: Color(0xffe897af),
         child: Column(
           children: [
-            Container( // Header
+            Container(
+              // Header
               color: const Color(0xffe897af),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: controller.closePressed,
                     icon: const Icon(
                       Icons.close,
                       color: Color(0xffffffff),
-                    )
-                ),
+                    )),
               ),
             ),
             Padding(
@@ -131,29 +131,32 @@ class Find extends GetView<FindController> {
                   borderRadius: BorderRadius.circular(18),
                   color: const Color(0xffD2D2D2),
                 ),
-                child: TextField(
-                  controller: inputController,
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Search",
-                      hintStyle: const TextStyle(
-                        fontSize: 15,
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        size: 20,
-                      ),
-                      suffixIcon: IconButton(
-                        icon: const Icon(
-                          Icons.close,
-                          size: 20,
-                        ),
-                        onPressed: () => inputController.clear(),
-                      )),
-                  maxLines: 1,
-                  textInputAction: TextInputAction.done,
-                ),
+                child: Obx(() => TextField(
+                      controller: controller.inputController,
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Search",
+                          hintStyle: const TextStyle(
+                            fontSize: 15,
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            size: 20,
+                          ),
+                          suffixIcon: controller.inputText.isEmpty
+                              ? null
+                              : IconButton(
+                                  icon: const Icon(
+                                    Icons.close,
+                                    size: 20,
+                                  ),
+                                  onPressed: () =>
+                                      controller.inputController.clear(),
+                                )),
+                      maxLines: 1,
+                      textInputAction: TextInputAction.done,
+                    )),
               ),
             ),
             Padding(
@@ -172,14 +175,30 @@ class Find extends GetView<FindController> {
   }
 }
 
-class FindBindings extends Bindings{
+class FindBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => FindController());
   }
-
 }
 
-class FindController extends GetxController{
+class FindController extends GetxController {
+  final inputController = TextEditingController();
+  final inputText = "".obs;
 
+  void closePressed() {
+    Get.offNamed(RouteNames.home);
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    inputController.addListener(() => inputText.value = inputController.text);
+  }
+
+  @override
+  void onClose() {
+    inputController.dispose();
+    super.onClose();
+  }
 }
