@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cu_problem_exchange/widget/tabbar.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
+import 'package:get/get.dart';
 
-class Account extends StatelessWidget {
+class Account extends GetView<AccountController> {
   const Account({Key? key}) : super(key: key);
 
   @override
@@ -54,4 +55,16 @@ class Account extends StatelessWidget {
       ),
     );
   }
+}
+
+class AccountBindings extends Bindings{
+  @override
+  void dependencies() {
+    Get.lazyPut(() => AccountController());
+  }
+
+}
+
+class AccountController extends GetxController{
+
 }

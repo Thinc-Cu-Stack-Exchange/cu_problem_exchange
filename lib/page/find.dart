@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CreateRecentSearch extends StatelessWidget {
   final String textRecentSearch;
@@ -95,7 +96,7 @@ class CreateResultSearch extends StatelessWidget {
   }
 }
 
-class Find extends StatelessWidget {
+class Find extends GetView<FindController> {
   Find({Key? key}) : super(key: key);
   final dataSearch = ["s1", "s2", "s3"];
   final dataBase = ["a", "b", "c", "cca", "bc", "ac"];
@@ -164,4 +165,16 @@ class Find extends StatelessWidget {
     // )),
     //   );
   }
+}
+
+class FindBindings extends Bindings{
+  @override
+  void dependencies() {
+    Get.lazyPut(() => FindController());
+  }
+
+}
+
+class FindController extends GetxController{
+
 }
