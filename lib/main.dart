@@ -10,6 +10,7 @@ void main() => runApp(GetMaterialApp(
       theme: ThemeData(
         // Define the default brightness and colors.
         primaryColor: const Color(0xffe897af),
+        backgroundColor: const Color(0xffE7E7E7),
 
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: TextButton.styleFrom(
@@ -25,7 +26,7 @@ void main() => runApp(GetMaterialApp(
             binding: HomeBindings()),
         GetPage(
             name: RouteNames.create,
-            page: () => const Create(),
+            page: () => Create(),
             binding: CreateBindings()),
         GetPage(
             name: RouteNames.find, page: () => Find(), binding: FindBindings()),
