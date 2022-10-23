@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +14,7 @@ class Create extends GetView<CreateController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -37,47 +39,56 @@ class Create extends GetView<CreateController> {
             Expanded(
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Obx(() => ListView.builder(
-                          itemCount: 2 + controller.imageList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index == 0) {
-                              return TextField(
-                                controller: controller.titleController,
-                                style: const TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold),
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Title',
-                                ),
-                                maxLines: null,
-                              );
-                            } else if (index == 1) {
-                              return TextField(
-                                controller: controller.contentController,
-                                style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.normal),
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Content',
-                                ),
-                                maxLines: null,
-                                keyboardType: TextInputType.multiline,
-                              );
-                            } else {
-                              return LayoutBuilder(
-                                  builder: (_, constraints) => Obx(() =>
-                                      SizedBox(
-                                          height: constraints.maxWidth *
-                                              controller
-                                                  .imageRatios[index - 2].value,
-                                          child: PhotoView(
-                                            imageProvider:
-                                                controller.imageList[index - 2],
-                                          ))));
-                            }
-                          },
-                        )))),
+                    child: ListView(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      children: [
+                        TextField(
+                          controller: controller.titleController,
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Title',
+                          ),
+                          maxLines: null,
+                        ),
+                        TextField(
+                          controller: controller.contentController,
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.normal),
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Content',
+                          ),
+                          maxLines: null,
+                          keyboardType: TextInputType.multiline,
+                        ),
+                        Obx(() => controller.imageList.isNotEmpty
+                            ? Stack(alignment: Alignment.topRight, children: [
+                                CarouselSlider.builder(
+                                    itemCount: controller.imageList.length,
+                                    itemBuilder: (ctx, index, _) => PhotoView(
+                                          backgroundDecoration: BoxDecoration(
+                                              color: context
+                                                  .theme.backgroundColor),
+                                          imageProvider:
+                                              controller.imageList[index],
+                                          minScale:
+                                              PhotoViewComputedScale.covered,
+                                        ),
+                                    options: CarouselOptions(
+                                        viewportFraction: 1,
+                                        onPageChanged:
+                                            controller.imagePageChanged)),
+                                Text(
+                                    "${controller.showingImageIndex}/${controller.imageList.length}",
+                                    textAlign: TextAlign.right,
+                                    style:
+                                        const TextStyle(color: Colors.white)),
+                              ])
+                            : Container()),
+                      ],
+                    ))),
             ElevatedButton(
                 onPressed: controller.addPhotoPressed,
                 child: Padding(
@@ -105,10 +116,9 @@ class Create extends GetView<CreateController> {
 }
 
 class CreateController extends GetxController {
-  RxList<FileImage> imageList = RxList<FileImage>();
+  final imageList = RxList<FileImage>();
 
-  // ratio (height / width)
-  final imageRatios = <Rx<double>>[];
+  final showingImageIndex = 1.obs;
 
   final titleController = TextEditingController();
   final contentController = TextEditingController();
@@ -123,34 +133,23 @@ class CreateController extends GetxController {
     Get.bottomSheet(bottomSheet);
   }
 
+  void imagePageChanged(int index, CarouselPageChangedReason _) {
+    showingImageIndex.value = index + 1;
+  }
+
   void pickImageFromCamera() async {
-    XFile? file = await ImagePicker().pickImage(source: ImageSource.camera);
-    addImage(file);
+    final file = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (file == null) {
+      return;
+    }
+    imageList.add(FileImage(File(file.path)));
     Get.back();
   }
 
   void pickImageFromGallery() async {
-    XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
-    addImage(file);
+    final files = await ImagePicker().pickMultiImage();
+    imageList.addAll(files.map((file) => FileImage(File(file.path))));
     Get.back();
-  }
-
-  void addImage(XFile? file) {
-    if (file == null) {
-      return;
-    }
-
-    final img = FileImage(File(file.path));
-    final idx = imageList.length;
-    imageList.add(img);
-    imageRatios.add(0.0.obs);
-
-    img
-        .resolve(const ImageConfiguration())
-        .addListener(ImageStreamListener((info, _) {
-      imageRatios[idx].value =
-          info.image.height.toDouble() / info.image.width.toDouble();
-    }));
   }
 
   @override
