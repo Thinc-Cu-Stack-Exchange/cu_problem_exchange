@@ -1,3 +1,4 @@
+import 'package:cu_problem_exchange/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,7 @@ class Account extends GetView<AccountController> {
                 child: Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: controller.closePressed,
                         icon: const Icon(
                           Icons.close,
                           color: Color(0xffffffff),
@@ -206,5 +207,9 @@ class AccountBindings extends Bindings{
 }
 
 class AccountController extends GetxController{
+
+  void closePressed(){
+    Get.offNamed(RouteNames.home);
+  }
 
 }
