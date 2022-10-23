@@ -161,7 +161,7 @@ class CreateController extends GetxController {
   }
 }
 
-class CreateBinding implements Bindings {
+class CreateBindings implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => CreateController());
