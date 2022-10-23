@@ -52,7 +52,7 @@ class CreateRecentSearch extends StatelessWidget {
   }
 }
 
-class     CreateResultSearch extends StatelessWidget {
+class CreateResultSearch extends StatelessWidget {
   final String textResultSearch;
 
   const CreateResultSearch({super.key, required this.textResultSearch});

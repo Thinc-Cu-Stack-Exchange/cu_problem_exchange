@@ -6,21 +6,21 @@ import 'package:get/get.dart';
 
 import '../route_names.dart';
 
-class createTag extends StatelessWidget {
-  var tagname;
-  var max_length = 20;
+class      CreateTag extends StatelessWidget {
+  String tagname;
+  var maxLength = 20;
   var iconSize = 20.0;
 
-  createTag({super.key, required this.tagname});
+  CreateTag({super.key, required this.tagname});
 
   @override
   Widget build(BuildContext context) {
-    if (tagname.length > max_length) {
-      tagname = tagname.substring(0, max_length);
+    if (tagname.length > maxLength) {
+      tagname = tagname.substring(0, maxLength);
       tagname += "...";
     }
     return Padding(
-      padding: EdgeInsets.fromLTRB(45, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(45, 0, 0, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -30,20 +30,20 @@ class createTag extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                color: Color(0xffe897af),
+                color: const Color(0xffe897af),
               ),
               child: TextButton(
                 onPressed: () {},
                 style: ButtonStyle(
                     alignment: Alignment.centerLeft, // <-- had to set alignment
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 20),
+                      const EdgeInsets.symmetric(horizontal: 20),
                     ),
 
                 ),
                 child: Text(
                   tagname,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: Color(0xffffffff),
                   ),
@@ -81,21 +81,22 @@ class Home extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final drawerWidth = MediaQuery.of(context).size.width * 0.75;
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             appBar: const CustomTopBar(
               tag: 'Home',
             ),
-            drawer: Container(
-                width: MediaQuery.of(context).size.width * 0.75,
+            drawer: SizedBox(
+                width: drawerWidth,
                 child: Drawer(
                   child: ListView(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      ListTile(
+                      const ListTile(
                         title: Text(
                           "Recently Visited",
                           style: TextStyle(
@@ -107,14 +108,14 @@ class Home extends GetView<HomeController> {
                       ),
                       Column(
                         children: [
-                          createTag(tagname: "tag1"),
-                          createTag(tagname: "tag2 psls"),
-                          createTag(tagname: "123456789012345678901234567890"),
-                          createTag(
+                          CreateTag(tagname: "tag1"),
+                          CreateTag(tagname: "tag2 psls"),
+                          CreateTag(tagname: "ooooooooooooooooooooooooooo"),
+                          CreateTag(
                               tagname: "pslspslspslspslspslspslspslspslspslspslspslspslspslspsls")
                         ],
                       ),
-                      ListTile(
+                      const ListTile(
                         title: Text(
                           "Your Followed Tag",
                           style: TextStyle(
@@ -126,13 +127,13 @@ class Home extends GetView<HomeController> {
                       ),
                       Column(
                         children: [
-                          createTag(tagname: "followed tag1"),
-                          createTag(tagname: "fol tag2"),
-                          createTag(tagname: "P"),
-                          createTag(tagname: "S"),
-                          createTag(tagname: "L"),
-                          createTag(tagname: "S"),
-                          createTag(tagname: "Tasa"),
+                          CreateTag(tagname: "followed tag1"),
+                          CreateTag(tagname: "fol tag2"),
+                          CreateTag(tagname: "P"),
+                          CreateTag(tagname: "S"),
+                          CreateTag(tagname: "L"),
+                          CreateTag(tagname: "S"),
+                          CreateTag(tagname: "Tasa"),
                         ],
                       ),
                     ],

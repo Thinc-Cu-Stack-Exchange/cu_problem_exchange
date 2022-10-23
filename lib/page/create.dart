@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,36 +37,38 @@ class Create extends GetView<CreateController> {
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Obx(() => ListView.builder(
-                      itemCount: 2 + controller.imageList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (index == 0) {
-                          return TextField(
-                            controller: controller.titleController,
-                            style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Title',
-                            ),
-                            maxLines: null,
-                          );
-                        } else if (index == 1) {
-                          return TextField(
-                            controller: controller.contentController,
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.normal),
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Content',
-                            ),
-                            maxLines: null,
-                            keyboardType: TextInputType.multiline,
-                          );
-                        } else {
-                          return Image(image: controller.imageList[index - 2]);
-                        }
-                      },
-                    )))),
+                          itemCount: 2 + controller.imageList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (index == 0) {
+                              return TextField(
+                                controller: controller.titleController,
+                                style: const TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.bold),
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Title',
+                                ),
+                                maxLines: null,
+                              );
+                            } else if (index == 1) {
+                              return TextField(
+                                controller: controller.contentController,
+                                style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal),
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Content',
+                                ),
+                                maxLines: null,
+                                keyboardType: TextInputType.multiline,
+                              );
+                            } else {
+                              return Image(
+                                  image: controller.imageList[index - 2]);
+                            }
+                          },
+                        )))),
             ElevatedButton(
                 onPressed: controller.addPhotoPressed,
                 child: Padding(
@@ -102,27 +103,21 @@ class CreateController extends GetxController {
 
   final bottomSheet = const ImagePickerBottomSheet();
 
-
   void closePressed() {
     Get.offNamed(RouteNames.home);
   }
 
   void addPhotoPressed() {
     Get.bottomSheet(bottomSheet);
-    printInfo(info: "We love psls");
   }
 
   void pickImageFromCamera() async {
-    try {
-      XFile? file = await ImagePicker().pickImage(source: ImageSource.camera);
-      addImage(file);
-    }catch(ex){developer.log("ERROR PSLS SA LOVE SAW");
-    }
+    XFile? file = await ImagePicker().pickImage(source: ImageSource.camera);
+    addImage(file);
     Get.back();
   }
 
   void pickImageFromGallery() async {
-
     XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
     addImage(file);
     Get.back();
