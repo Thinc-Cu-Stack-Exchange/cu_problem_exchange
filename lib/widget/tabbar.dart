@@ -1,4 +1,6 @@
+import 'package:cu_problem_exchange/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String tag;
@@ -46,7 +48,9 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           padding: const EdgeInsets.all(4),
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(RouteNames.find);
+          },
           icon: const Icon(
             Icons.search,
             color: Color(0xffffffff),
@@ -55,7 +59,9 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         IconButton(
           padding: const EdgeInsets.all(4),
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(RouteNames.account);
+          },
           icon: const Icon(
             Icons.account_circle,
             color: Color(0xffffffff),
@@ -87,7 +93,9 @@ class CustomBotBar extends StatelessWidget implements PreferredSizeWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(RouteNames.home);
+                },
                 icon: const Icon(
                   Icons.home,
                   size: 20,

@@ -11,15 +11,15 @@ class CreateDrawer extends StatelessWidget {
     return SizedBox(
         width: drawerWidth,
         child: ColorfulSafeArea(
-          color: Color(0xffe897af),
+          color: const Color(0xffe897af),
           child: Drawer(
-            backgroundColor: Color(0xffffffff),
+            backgroundColor: const Color(0xffffffff),
             child: ListView(
               children: [
                 Container(
-                  color: Color(0xffe897af),
-                  padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  color: const Color(0xffe897af),
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                   child: const ListTile(
                     title: Text(
                       "Recently Visited",
@@ -39,9 +39,9 @@ class CreateDrawer extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  color: Color(0xffe897af),
-                  padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                  margin: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                  color: const Color(0xffe897af),
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                   child: const ListTile(
                     title: Text(
                       "Your Followed Tag",
