@@ -1,20 +1,22 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 
 class createRecentSearch extends StatelessWidget {
   final String textRecentSearch;
 
-  createRecentSearch({required this.textRecentSearch});
+  const createRecentSearch({super.key, required this.textRecentSearch});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: Icon(
                 Icons.history,
@@ -29,7 +31,7 @@ class createRecentSearch extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     textRecentSearch,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       color: Color(0xff000000),
                     ),
@@ -39,7 +41,7 @@ class createRecentSearch extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.delete,
                 size: 20,
               ),
@@ -54,17 +56,17 @@ class createRecentSearch extends StatelessWidget {
 class createResultSearch extends StatelessWidget {
   final String textResultSearch;
 
-  createResultSearch({required this.textResultSearch});
+  const createResultSearch({super.key, required this.textResultSearch});
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: Icon(
                 Icons.history,
@@ -79,7 +81,7 @@ class createResultSearch extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     textResultSearch,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       color: Color(0xff000000),
                     ),
@@ -87,13 +89,6 @@ class createResultSearch extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.delete,
-                size: 20,
-              ),
-            )
           ],
         ),
       ),
@@ -120,7 +115,7 @@ class Find extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: Color(0xffD2D2D2),
+                  color: const Color(0xffD2D2D2),
                 ),
                 child: TextField(
                   controller: inputController,
@@ -128,15 +123,15 @@ class Find extends StatelessWidget {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Search",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         fontSize: 15,
                       ),
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.search,
                         size: 20,
                       ),
                       suffixIcon: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.close,
                           size: 20,
                         ),
@@ -147,20 +142,13 @@ class Find extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(
-              height: 10,
-            )
-            ,
-            Container(
-
-              child: Padding(
-                padding: EdgeInsets.all(3),
-                child: Column(
-                  children: [
-                    createRecentSearch(textRecentSearch: DataSearch[0]),
-                    createRecentSearch(textRecentSearch: DataSearch[1])
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.all(3),
+              child: Column(
+                children: [
+                  createRecentSearch(textRecentSearch: DataSearch[0]),
+                  createRecentSearch(textRecentSearch: DataSearch[1])
+                ],
               ),
             ),
           ],
