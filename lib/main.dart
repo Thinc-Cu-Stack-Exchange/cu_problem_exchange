@@ -31,7 +31,7 @@ void main() => runApp(GetMaterialApp(
             name: RouteNames.find, page: () => Find(), binding: FindBindings()),
         GetPage(
             name: RouteNames.account,
-            page: () => const Account(),
+            page: () => Account(),
             binding: AccountBindings()),
       ],
     ));

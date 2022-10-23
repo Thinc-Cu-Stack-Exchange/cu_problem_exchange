@@ -70,7 +70,7 @@ class CreateResultSearch extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: Icon(
-                Icons.history,
+                Icons.search,
                 size: 20,
               ),
             ),
@@ -146,7 +146,7 @@ class Find extends GetView<FindController> {
               child: Column(
                 children: [
                   CreateRecentSearch(textRecentSearch: dataSearch[0]),
-                  CreateRecentSearch(textRecentSearch: dataSearch[1])
+                  CreateResultSearch(textResultSearch: dataBase[0])
                 ],
               ),
             ),
