@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
+import 'package:get/get.dart';
 
 class CreateDrawer extends StatelessWidget {
   final double drawerWidth;
@@ -33,9 +34,9 @@ class CreateDrawer extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    CreateTag(tagname: "tag1",drawerWidth: drawerWidth,deletableTag: true,),
-                    CreateTag(tagname: "tag2 psls",drawerWidth: drawerWidth,deletableTag: true,),
-                    CreateTag(tagname: "ooooooooooooooooooooooooooooooo",drawerWidth: drawerWidth,deletableTag: true,),
+                    CreateTag(tagname: "tag1",deletableTag: true,),
+                    CreateTag(tagname: "tag2 psls",deletableTag: true,),
+                    CreateTag(tagname: "ooooooooooooooooooooooooooooooo",deletableTag: true,),
                   ],
                 ),
                 Container(
@@ -55,24 +56,19 @@ class CreateDrawer extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    CreateTag(tagname: "followed tag1",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "passakorn limsaeng passakorn limsaeng",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "possakarn lumsum possakarn lumsum",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-                    CreateTag(tagname: "fol tag2",drawerWidth: drawerWidth,),
-
+                    CreateTag(tagname: "followed tag1"),
+                    CreateTag(tagname: "passakorn limsaeng passakorn limsaeng"),
+                    CreateTag(tagname: "possakarn lumsum possakarn lumsum"),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
+                    CreateTag(tagname: "fol tag2",),
                   ],
                 )
                 ,
@@ -90,14 +86,13 @@ class CreateTag extends StatelessWidget {
   String tagname;
   var iconSize = 20.0;
   final double tagHeight = 30.0;
-  final double drawerWidth;
   final double frontMargin = 45;
-  var deletableTag;
-  CreateTag({super.key, required this.tagname, required this.drawerWidth, this.deletableTag = false});
+  bool deletableTag;
+  CreateTag({super.key, required this.tagname, this.deletableTag = false});
 
   @override
   Widget build(BuildContext context) {
-    final double tagWidth = drawerWidth - iconSize - frontMargin - 30;
+    final double tagWidth = context.width * 0.75 - iconSize - frontMargin - 30;
     return Row(
       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

@@ -1,5 +1,5 @@
 // ignore_for_file: camel_case_types
-
+import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -106,9 +106,24 @@ class Find extends GetView<FindController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      backgroundColor: Color(0xffffffff),
+      body: ColorfulSafeArea(
+        color: Color(0xffe897af),
         child: Column(
           children: [
+            Container( // Header
+              color: const Color(0xffe897af),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.close,
+                      color: Color(0xffffffff),
+                    )
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 20, 10),
               child: Container(
@@ -154,16 +169,6 @@ class Find extends GetView<FindController> {
         ),
       ),
     );
-    //   Scaffold(
-    //     body: SafeArea(child: Column(
-    //       children: [
-    //         Padding(
-    //           padding: EdgeInsets.all(0),
-    //           child:
-    //         )
-    //       ],
-    // )),
-    //   );
   }
 }
 
