@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:photo_view/photo_view.dart';
 
 import '../route_names.dart';
 
@@ -64,8 +65,16 @@ class Create extends GetView<CreateController> {
                                 keyboardType: TextInputType.multiline,
                               );
                             } else {
-                              return Image(
-                                  image: controller.imageList[index - 2]);
+                              return LayoutBuilder(
+                                  builder: (_, constraints) => Obx(() =>
+                                      SizedBox(
+                                          height: constraints.maxWidth *
+                                              controller
+                                                  .imageRatios[index - 2].value,
+                                          child: PhotoView(
+                                            imageProvider:
+                                                controller.imageList[index - 2],
+                                          ))));
                             }
                           },
                         )))),
@@ -98,6 +107,9 @@ class Create extends GetView<CreateController> {
 class CreateController extends GetxController {
   RxList<FileImage> imageList = RxList<FileImage>();
 
+  // ratio (height / width)
+  final imageRatios = <Rx<double>>[];
+
   final titleController = TextEditingController();
   final contentController = TextEditingController();
 
@@ -128,7 +140,17 @@ class CreateController extends GetxController {
       return;
     }
 
-    imageList.add(FileImage(File(file.path)));
+    final img = FileImage(File(file.path));
+    final idx = imageList.length;
+    imageList.add(img);
+    imageRatios.add(0.0.obs);
+
+    img
+        .resolve(const ImageConfiguration())
+        .addListener(ImageStreamListener((info, _) {
+      imageRatios[idx].value =
+          info.image.height.toDouble() / info.image.width.toDouble();
+    }));
   }
 
   @override
