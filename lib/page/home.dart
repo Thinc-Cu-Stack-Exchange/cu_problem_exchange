@@ -81,7 +81,7 @@ class Home extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final drawerWidth = MediaQuery.of(context).size.width * 0.75;
+    final drawerWidth = context.width * 0.75;
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
