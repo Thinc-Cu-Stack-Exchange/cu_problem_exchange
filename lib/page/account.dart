@@ -6,12 +6,12 @@ class Account extends GetView<AccountController> {
   var userName = "PassakornLimsaengLimsaeng";
   var userEmail = "psls@hatyaiwit.ac.th";
   var userKarma = 696;
-  var textboldStyle = TextStyle(
+  var textboldStyle = const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: Color(0xff000000),
   );
-  var textStyle = TextStyle(
+  var textStyle = const TextStyle(
     fontSize: 16,
     color: Color(0xff000000),
   );
@@ -20,25 +20,25 @@ class Account extends GetView<AccountController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE7E7E7),
+      backgroundColor: const Color(0xffE7E7E7),
       body: ColorfulSafeArea(
-        color: Color(0xffe897af),
+        color: const Color(0xffe897af),
         child: Column(
           children: [
             Container( // Header
-              color: Color(0xffe897af),
+              color: const Color(0xffe897af),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Row(
                   children: [
                     IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.close,
                           color: Color(0xffffffff),
                         )
                     ),
-                    Text(
+                    const Text(
                       "User Account",
                       style: TextStyle(
                         color: Color(0xffffffff),
@@ -50,10 +50,10 @@ class Account extends GetView<AccountController> {
                 ),
               ),
             ),
-            Align( // Avatar
+            const Align( // Avatar
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.all(35.0),
+                padding: EdgeInsets.all(35.0),
                 child: CircleAvatar(
                   backgroundColor: Color(0xffffffff),
                   radius: 75,
@@ -72,12 +72,12 @@ class Account extends GetView<AccountController> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: Color(0xffffffff),
+                  color: const Color(0xffffffff),
                 ),
                 child: SizedBox(
                   width: context.width * 0.85,
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                       children: [
                         Row(
@@ -89,7 +89,7 @@ class Account extends GetView<AccountController> {
                                 Align(
                                   alignment: Alignment.topLeft,
                                   child: Container(
-                                    padding: EdgeInsets.fromLTRB(10, 10 , 0, 10),
+                                    padding: const EdgeInsets.fromLTRB(10, 10 , 0, 10),
                                     child: Text(
                                       "Name ",
                                       style: textboldStyle,
@@ -100,7 +100,7 @@ class Account extends GetView<AccountController> {
                                 Align(
                                   alignment: Alignment.topLeft,
                                   child: Container(
-                                    padding: EdgeInsets.fromLTRB(10, 10 , 0, 10),
+                                    padding: const EdgeInsets.fromLTRB(10, 10 , 0, 10),
                                     child: Text(
                                       "Gmail ",
                                       style: textboldStyle,
@@ -111,7 +111,7 @@ class Account extends GetView<AccountController> {
                                 Align(
                                   alignment: Alignment.topLeft,
                                   child: Container(
-                                    padding: EdgeInsets.fromLTRB(10, 10 , 0, 10),
+                                    padding: const EdgeInsets.fromLTRB(10, 10 , 0, 10),
                                     child: Text(
                                       "Karma ",
                                       style: textboldStyle,
@@ -129,7 +129,7 @@ class Account extends GetView<AccountController> {
                                 children: [
                                   Container(
                                     alignment: Alignment.topLeft,
-                                    padding: EdgeInsets.fromLTRB(10, 10 , 0, 10),
+                                    padding: const EdgeInsets.fromLTRB(10, 10 , 0, 10),
                                     child: Text(
                                       ":  $userName",
                                       style: textStyle,
@@ -138,7 +138,7 @@ class Account extends GetView<AccountController> {
                                   ),
                                   Container(
                                     alignment: Alignment.topLeft,
-                                    padding: EdgeInsets.fromLTRB(10, 10 , 0, 10),
+                                    padding: const EdgeInsets.fromLTRB(10, 10 , 0, 10),
                                     child: Text(
                                       ":  $userEmail",
                                       style: textStyle,
@@ -147,7 +147,7 @@ class Account extends GetView<AccountController> {
                                   ),
                                   Container(
                                     alignment: Alignment.topLeft,
-                                    padding: EdgeInsets.fromLTRB(10, 10 , 0, 10),
+                                    padding: const EdgeInsets.fromLTRB(10, 10 , 0, 10),
                                     child: Text(
                                       ":",
                                       style: textStyle,
@@ -160,10 +160,10 @@ class Account extends GetView<AccountController> {
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 30),
+                          padding: const EdgeInsets.symmetric(vertical: 30),
                           child: Text(
                             userKarma.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 55,
                               fontWeight: FontWeight.w900,
                               color: Color(0xff000000),
@@ -172,21 +172,15 @@ class Account extends GetView<AccountController> {
                         ),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: Container(
-                            // decoration: BoxDecoration(
-                            //   color: Color(0xffe897af),
-                            //   borderRadius: BorderRadius.circular(18),
-                            // ),
-                            child: ElevatedButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Log Out",
-                                  style: TextStyle(
-                                    color: Color(0xffffffff),
-                                    fontSize: 16,
-                                  ),
-                                )
-                            ),
+                          child: ElevatedButton(
+                              onPressed: () {},
+                              child: const Text(
+                                "Log Out",
+                                style: TextStyle(
+                                  color: Color(0xffffffff),
+                                  fontSize: 16,
+                                ),
+                              )
                           ),
                         )
                       ],
