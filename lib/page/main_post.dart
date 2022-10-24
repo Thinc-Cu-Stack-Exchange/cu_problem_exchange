@@ -281,7 +281,6 @@ class CreateComment extends StatelessWidget {
             ),
           ) : Container(),
 
-
         ],
       ),
     );
