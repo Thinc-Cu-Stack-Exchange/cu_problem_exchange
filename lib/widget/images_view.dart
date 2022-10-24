@@ -1,26 +1,44 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:photo_view/photo_view.dart';
+
+import '../route_names.dart';
 
 class ImagesView extends GetWidget<ImagesViewController> {
-  final RxList<ImageProvider> imageList;
   final Color backgroundColor;
+  final RxList<ImageProvider> imageList;
 
-  const ImagesView({super.key, required this.imageList, this.backgroundColor = Colors.white});
+  const ImagesView(
+      {super.key,
+      required this.imageList,
+      this.backgroundColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => imageList.isNotEmpty
+    controller.imageList = imageList;
+    return Obx(() => controller.imageList.isNotEmpty
         ? Stack(alignment: Alignment.topRight, children: [
             CarouselSlider.builder(
-                itemCount: imageList.length,
-                itemBuilder: (ctx, index, _) => PhotoView(
-                      backgroundDecoration:
-                          BoxDecoration(color: backgroundColor),
-                      imageProvider: imageList[index],
-                      minScale: PhotoViewComputedScale.contained,
-                    ),
+                itemCount: controller.imageList.length,
+                itemBuilder: (ctx, index, _) =>
+                    Stack(fit: StackFit.expand, children: [
+                      Image(
+                        image: controller.imageList[index],
+                        fit: BoxFit.contain,
+                      ),
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: controller.onImageTapped,
+                        ),
+                      ),
+                    ]),
+                // PhotoView(
+                //   backgroundDecoration:
+                //   BoxDecoration(color: backgroundColor),
+                //   imageProvider: controller.imageList[index],
+                //   minScale: PhotoViewComputedScale.contained,
+                // )),
                 options: CarouselOptions(
                     viewportFraction: 1,
                     onPageChanged: controller.imagePageChanged)),
@@ -29,12 +47,12 @@ class ImagesView extends GetWidget<ImagesViewController> {
                 decoration: const BoxDecoration(
                     color: Colors.black26,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                child:
-                    Text("${controller.showingImageIndex}/${imageList.length}",
-                        textAlign: TextAlign.right,
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ))),
+                child: Text(
+                    "${controller.showingImageIndex}/${controller.imageList.length}",
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ))),
           ])
         : Container());
   }
@@ -42,8 +60,22 @@ class ImagesView extends GetWidget<ImagesViewController> {
 
 class ImagesViewController extends GetxController {
   final showingImageIndex = 1.obs;
+  var imageList = <ImageProvider>[].obs;
 
   void imagePageChanged(int index, CarouselPageChangedReason _) {
     showingImageIndex.value = index + 1;
   }
+
+  void onImageTapped() {
+    Get.toNamed(RouteNames.fullImage,
+        arguments: FullImageArguments(
+            imageList: imageList, initialIndex: showingImageIndex.value-1));
+  }
+}
+
+class FullImageArguments {
+  final RxList<ImageProvider> imageList;
+  final int initialIndex;
+
+  FullImageArguments({required this.imageList, required this.initialIndex});
 }
