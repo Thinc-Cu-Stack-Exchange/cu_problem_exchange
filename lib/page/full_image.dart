@@ -1,4 +1,3 @@
-import 'package:cu_problem_exchange/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view_gallery.dart';
