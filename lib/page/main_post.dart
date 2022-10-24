@@ -70,7 +70,7 @@ class MainPost extends GetView<MainPostController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CreatePostHeader(
+                  PostHeader(
                       userImage: userImage,
                       userName: userName,
                       postTag: postTag,
@@ -81,18 +81,18 @@ class MainPost extends GetView<MainPostController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CreateTitle(
+                        Title(
                           postTitle: postTitle,
                         ),
-                        CreateText(
+                        PostText(
                           postText: postText,
                         ),
-                        CreateImg(),
+                        PostImage(),
                       ],
                     ),
                   ),
                   // bottom
-                  CreatePostBottom(
+                  PostBottom(
                       postLiked: postLiked, postCommentCount: postCommentCount)
                 ],
               ),

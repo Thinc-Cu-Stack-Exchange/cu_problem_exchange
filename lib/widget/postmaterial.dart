@@ -3,8 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-class CreatePostHeader extends StatelessWidget {
+class PostHeader extends StatelessWidget {
   final userImage;
   final String postTag;
   final String userName;
@@ -15,7 +14,7 @@ class CreatePostHeader extends StatelessWidget {
     fontWeight: FontWeight.normal,
   );
 
-  const CreatePostHeader({
+  const PostHeader({
     super.key,
     required this.userImage,
     required this.userName,
@@ -94,7 +93,7 @@ class CreatePostHeader extends StatelessWidget {
   }
 }
 
-class CreatePostBottom extends StatelessWidget {
+class PostBottom extends StatelessWidget {
   int postLiked = 26;
   int postCommentCount = 69;
   var upvoteColor = const Color(0xffffffff);
@@ -104,7 +103,9 @@ class CreatePostBottom extends StatelessWidget {
     fontSize: 10,
     fontWeight: FontWeight.normal,
   );
-  CreatePostBottom({super.key , required this.postLiked, required this.postCommentCount});
+
+  PostBottom(
+      {super.key, required this.postLiked, required this.postCommentCount});
 
   @override
   Widget build(BuildContext context) {
@@ -143,8 +144,7 @@ class CreatePostBottom extends StatelessWidget {
                   // Downvote icon
                   IconButton(
                       onPressed: () {
-                        if (downvoteColor ==
-                            const Color(0xffffffff)) {
+                        if (downvoteColor == const Color(0xffffffff)) {
                           downvoteColor = const Color(0xffFF2A69);
                           postLiked = min(postLiked - 1, 0);
                         } else {
@@ -181,17 +181,15 @@ class CreatePostBottom extends StatelessWidget {
                 ],
               ),
             ],
-          )
-      ),
+          )),
     );
   }
 }
 
+class PostTitle extends StatelessWidget {
+  final String postTitle;
 
-class CreateTitle extends StatelessWidget {
-  String postTitle;
-
-  CreateTitle({super.key, required this.postTitle});
+  const PostTitle({super.key, required this.postTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -209,36 +207,34 @@ class CreateTitle extends StatelessWidget {
   }
 }
 
-class CreateText extends StatelessWidget {
-  String postText;
+class PostText extends StatelessWidget {
+  final String postText;
 
-  CreateText({super.key, required this.postText});
+  const PostText({super.key, required this.postText});
 
   @override
   Widget build(BuildContext context) {
     return (postText != "")
         ? (Padding(
-      padding: const EdgeInsets.symmetric(vertical: 7),
-      child: Text(
-        postText,
-        style: const TextStyle(
-          color: Color(0xff000000),
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
-        ).apply(fontSizeFactor: 0.95),
-      ),
-    ))
+            padding: const EdgeInsets.symmetric(vertical: 7),
+            child: Text(
+              postText,
+              style: const TextStyle(
+                color: Color(0xff000000),
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+              ).apply(fontSizeFactor: 0.95),
+            ),
+          ))
         : Container();
   }
 }
 
-class CreateImg extends StatelessWidget {
-  const CreateImg({Key? key}) : super(key: key);
+class PostImage extends StatelessWidget {
+  const PostImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container();
   }
 }
-
-

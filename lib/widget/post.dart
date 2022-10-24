@@ -53,7 +53,7 @@ class Post extends GetWidget<PostController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Post Header
-                CreatePostHeader(
+                PostHeader(
                     userImage: userImage,
                     userName: userName,
                     postTag: postTag,
@@ -120,7 +120,7 @@ class Post extends GetWidget<PostController> {
                 ),
 
                 // Bottom
-                CreatePostBottom(postLiked: postLiked, postCommentCount: postCommentCount)
+                PostBottom(postLiked: postLiked, postCommentCount: postCommentCount)
               ],
             ),
           ),
