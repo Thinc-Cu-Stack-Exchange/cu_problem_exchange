@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cu_problem_exchange/widget/images_view.dart';
 import 'package:cu_problem_exchange/widget/post.dart';
 import 'package:cu_problem_exchange/widget/tabbar.dart';
 import 'package:cu_problem_exchange/widget/drawer.dart';
@@ -85,5 +86,6 @@ class HomeBindings implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => HomeController());
+    Get.create(() => ImagesViewController());
   }
 }

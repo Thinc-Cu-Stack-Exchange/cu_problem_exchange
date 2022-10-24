@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:photo_view/photo_view.dart';
 
 import '../route_names.dart';
+import '../widget/images_view.dart';
 
 class Create extends GetView<CreateController> {
   const Create({super.key});
@@ -63,30 +62,9 @@ class Create extends GetView<CreateController> {
                           maxLines: null,
                           keyboardType: TextInputType.multiline,
                         ),
-                        Obx(() => controller.imageList.isNotEmpty
-                            ? Stack(alignment: Alignment.topRight, children: [
-                                CarouselSlider.builder(
-                                    itemCount: controller.imageList.length,
-                                    itemBuilder: (ctx, index, _) => PhotoView(
-                                          backgroundDecoration: BoxDecoration(
-                                              color: context
-                                                  .theme.backgroundColor),
-                                          imageProvider:
-                                              controller.imageList[index],
-                                          minScale:
-                                              PhotoViewComputedScale.covered,
-                                        ),
-                                    options: CarouselOptions(
-                                        viewportFraction: 1,
-                                        onPageChanged:
-                                            controller.imagePageChanged)),
-                                Text(
-                                    "${controller.showingImageIndex}/${controller.imageList.length}",
-                                    textAlign: TextAlign.right,
-                                    style:
-                                        const TextStyle(color: Colors.white)),
-                              ])
-                            : Container()),
+                        ImagesView(
+                          imageList: controller.imageList,
+                        ),
                       ],
                     ))),
             ElevatedButton(
@@ -118,8 +96,6 @@ class Create extends GetView<CreateController> {
 class CreateController extends GetxController {
   final imageList = RxList<FileImage>();
 
-  final showingImageIndex = 1.obs;
-
   final titleController = TextEditingController();
   final contentController = TextEditingController();
 
@@ -131,10 +107,6 @@ class CreateController extends GetxController {
 
   void addPhotoPressed() {
     Get.bottomSheet(bottomSheet);
-  }
-
-  void imagePageChanged(int index, CarouselPageChangedReason _) {
-    showingImageIndex.value = index + 1;
   }
 
   void pickImageFromCamera() async {
