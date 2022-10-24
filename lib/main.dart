@@ -38,7 +38,7 @@ void main() => runApp(GetMaterialApp(
             binding: AccountBindings()),
         GetPage(
           name: RouteNames.mainPost,
-          page: () => const MainPost(),
+          page: () => MainPost(),
           binding: MainPostBindings(),
         ),
         GetPage(

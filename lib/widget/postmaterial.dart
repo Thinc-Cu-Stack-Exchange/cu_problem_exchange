@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 class CreatePostHeader extends StatelessWidget {
   final userImage;
@@ -90,4 +93,152 @@ class CreatePostHeader extends StatelessWidget {
     );
   }
 }
+
+class CreatePostBottom extends StatelessWidget {
+  int postLiked = 26;
+  int postCommentCount = 69;
+  var upvoteColor = const Color(0xffffffff);
+  var downvoteColor = const Color(0xffffffff);
+  final bottomStyle = const TextStyle(
+    color: Color(0xff000000),
+    fontSize: 10,
+    fontWeight: FontWeight.normal,
+  );
+  CreatePostBottom({super.key , required this.postLiked, required this.postCommentCount});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color(0xffe897af),
+      child: SizedBox(
+          height: 30,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // Vote
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Upvote icon
+                  IconButton(
+                      onPressed: () {
+                        if (upvoteColor == const Color(0xffffffff)) {
+                          upvoteColor = const Color(0xff00B2FF);
+                          postLiked += 1;
+                        } else {
+                          upvoteColor = const Color(0xffffffff);
+                          postLiked -= 1;
+                        }
+                      },
+                      icon: Icon(
+                        Icons.arrow_upward_outlined,
+                        size: 16,
+                        color: upvoteColor,
+                      )),
+                  // Liked post
+                  Text(
+                    postLiked.toString(),
+                    style: bottomStyle,
+                  ),
+                  // Downvote icon
+                  IconButton(
+                      onPressed: () {
+                        if (downvoteColor ==
+                            const Color(0xffffffff)) {
+                          downvoteColor = const Color(0xffFF2A69);
+                          postLiked = min(postLiked - 1, 0);
+                        } else {
+                          downvoteColor = const Color(0xffffffff);
+                          postLiked += 1;
+                        }
+                      },
+                      icon: Icon(
+                        Icons.arrow_downward_outlined,
+                        size: 16,
+                        color: downvoteColor,
+                      ))
+                ],
+              ),
+              // Comment
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton.icon(
+                    onPressed: () {},
+                    //controller.commentPressed,
+                    icon: const Icon(
+                      Icons.comment,
+                      size: 16,
+                      color: Color(0xffffffff),
+                    ),
+                    label: Text(
+                      (postCommentCount > 1)
+                          ? "$postCommentCount Comments"
+                          : "$postCommentCount Comment",
+                      style: bottomStyle,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          )
+      ),
+    );
+  }
+}
+
+
+class CreateTitle extends StatelessWidget {
+  String postTitle;
+
+  CreateTitle({super.key, required this.postTitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 7),
+      child: Text(
+        postTitle,
+        style: const TextStyle(
+          color: Color(0xff000000),
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+}
+
+class CreateText extends StatelessWidget {
+  String postText;
+
+  CreateText({super.key, required this.postText});
+
+  @override
+  Widget build(BuildContext context) {
+    return (postText != "")
+        ? (Padding(
+      padding: const EdgeInsets.symmetric(vertical: 7),
+      child: Text(
+        postText,
+        style: const TextStyle(
+          color: Color(0xff000000),
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+        ).apply(fontSizeFactor: 0.95),
+      ),
+    ))
+        : Container();
+  }
+}
+
+class CreateImg extends StatelessWidget {
+  const CreateImg({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
 

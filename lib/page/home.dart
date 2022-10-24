@@ -28,7 +28,7 @@ class Home extends GetView<HomeController> {
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
             onPressed: controller.createPressed,
-            backgroundColor: const Color(0xffe897af),
+            backgroundColor: const Color(0xffC78196),
             child: const Icon(
               Icons.add,
             ),

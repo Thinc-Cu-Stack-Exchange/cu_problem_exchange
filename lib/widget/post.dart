@@ -57,7 +57,8 @@ class Post extends GetWidget<PostController> {
                     userImage: userImage,
                     userName: userName,
                     postTag: postTag,
-                    postDate: postDate),
+                    postDate: postDate
+                ),
                 // body post
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +81,7 @@ class Post extends GetWidget<PostController> {
                               // Title
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 7),
+                                    const EdgeInsets.fromLTRB(0, 5, 0, 15),
                                 child: Text(
                                   postTitle,
                                   style: const TextStyle(
@@ -94,8 +95,7 @@ class Post extends GetWidget<PostController> {
                               // Text
                               (postText != "")
                                   ? (Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 7),
+                                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                                       child: Text(
                                         postText,
                                         style: const TextStyle(
@@ -118,86 +118,9 @@ class Post extends GetWidget<PostController> {
                     ),
                   ],
                 ),
-                // Spacing
-                // const SizedBox(
-                //   height: 15,
-                // ),
+
                 // Bottom
-                Container(
-                  color: const Color(0xffe897af),
-                  child: SizedBox(
-                    height: 30,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        // Vote
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            // Upvote icon
-                            IconButton(
-                                onPressed: () {
-                                  if (upvoteColor == const Color(0xffffffff)) {
-                                    upvoteColor = const Color(0xff00B2FF);
-                                    postLiked += 1;
-                                  } else {
-                                    upvoteColor = const Color(0xffffffff);
-                                    postLiked -= 1;
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.arrow_upward_outlined,
-                                  size: 16,
-                                  color: upvoteColor,
-                                )),
-                            // Liked post
-                            Text(
-                              postLiked.toString(),
-                              style: headerStyle,
-                            ),
-                            // Downvote icon
-                            IconButton(
-                                onPressed: () {
-                                  if (downvoteColor ==
-                                      const Color(0xffffffff)) {
-                                    downvoteColor = const Color(0xffFF2A69);
-                                    postLiked = min(postLiked - 1, 0);
-                                  } else {
-                                    downvoteColor = const Color(0xffffffff);
-                                    postLiked += 1;
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.arrow_downward_outlined,
-                                  size: 16,
-                                  color: downvoteColor,
-                                ))
-                          ],
-                        ),
-                        // Comment
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            TextButton.icon(
-                              onPressed: controller.commentPressed,
-                              icon: const Icon(
-                                Icons.comment,
-                                size: 16,
-                                color: Color(0xffffffff),
-                              ),
-                              label: Text(
-                                (postCommentCount > 1)
-                                    ? "$postCommentCount Comments"
-                                    : "$postCommentCount Comment",
-                                style: headerStyle,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                CreatePostBottom(postLiked: postLiked, postCommentCount: postCommentCount)
               ],
             ),
           ),
