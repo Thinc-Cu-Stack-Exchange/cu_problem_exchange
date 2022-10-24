@@ -2,7 +2,7 @@ import 'package:cu_problem_exchange/page/account.dart';
 import 'package:cu_problem_exchange/page/create.dart';
 import 'package:cu_problem_exchange/page/find.dart';
 import 'package:cu_problem_exchange/page/home.dart';
-import 'package:cu_problem_exchange/page/mainpost.dart';
+import 'package:cu_problem_exchange/page/main_post.dart';
 import 'package:cu_problem_exchange/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
