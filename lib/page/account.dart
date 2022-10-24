@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class Account extends GetView<AccountController> {
   var userName = "PassakornLimsaengLimsaeng";
   var userEmail = "psls@hatyaiwit.ac.th";
