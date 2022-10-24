@@ -93,15 +93,15 @@ class PostHeader extends StatelessWidget {
 }
 
 class PostBottom extends GetWidget<PostBottomController> {
-  int postLiked = 26;
-  int postCommentCount = 69;
+  final int postLiked;
+  final int postCommentCount;
   final bottomStyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 10,
     fontWeight: FontWeight.normal,
   );
 
-  PostBottom(
+  const PostBottom(
       {super.key, required this.postLiked, required this.postCommentCount});
 
   @override
