@@ -47,8 +47,8 @@ class Home extends GetView<HomeController> {
                 postText: "PsLs \nPsLs \nPSLSsafff\npsps",
                 // optional
                 postImage: [AssetImage("assets/sample_image.jpg")].obs,
-                postLiked: 26,
-                postCommentCount: 69,
+                postVoted: 26,
+                postAnswerCount: 69,
               ),
               Post(
                 userImage: AssetImage("assets/sample_user.png"),
@@ -58,8 +58,8 @@ class Home extends GetView<HomeController> {
                 postDate: "12/12/21",
                 postTitle:
                     "Possakarnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
-                postLiked: 26,
-                postCommentCount: 69,
+                postVoted: 26,
+                postAnswerCount: 69,
                 postImage: <ImageProvider>[].obs,
               ),
               Post(
@@ -72,8 +72,8 @@ class Home extends GetView<HomeController> {
                     "Possakarnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
                 postText: "PsLs \nPsLs \nPSLS",
                 // optional
-                postLiked: 26,
-                postCommentCount: 69,
+                postVoted: 26,
+                postAnswerCount: 69,
                 postImage: <ImageProvider>[].obs,
               ),
             ],
