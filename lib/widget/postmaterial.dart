@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:cu_problem_exchange/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,11 +92,9 @@ class PostHeader extends StatelessWidget {
   }
 }
 
-class PostBottom extends StatelessWidget {
+class PostBottom extends GetWidget<PostBottomController> {
   int postLiked = 26;
   int postCommentCount = 69;
-  var upvoteColor = const Color(0xffffffff);
-  var downvoteColor = const Color(0xffffffff);
   final bottomStyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 10,
@@ -109,6 +106,7 @@ class PostBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.postLiked.value = postLiked;
     return Container(
       color: const Color(0xffe897af),
       child: SizedBox(
@@ -121,42 +119,30 @@ class PostBottom extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Upvote icon
-                  IconButton(
-                      onPressed: () {
-                        if (upvoteColor == const Color(0xffffffff)) {
-                          upvoteColor = const Color(0xff00B2FF);
-                          postLiked += 1;
-                        } else {
-                          upvoteColor = const Color(0xffffffff);
-                          postLiked -= 1;
-                        }
-                      },
+                  Obx(() => IconButton(
+                      onPressed: controller.onUpvotePressed,
                       icon: Icon(
                         Icons.arrow_upward_outlined,
                         size: 16,
-                        color: upvoteColor,
-                      )),
+                        color: controller.upvoted.value
+                            ? const Color(0xff00B2FF)
+                            : Colors.black,
+                      ))),
                   // Liked post
-                  Text(
-                    postLiked.toString(),
-                    style: bottomStyle,
-                  ),
+                  Obx(() => Text(
+                        controller.totalPostLiked.toString(),
+                        style: bottomStyle,
+                      )),
                   // Downvote icon
-                  IconButton(
-                      onPressed: () {
-                        if (downvoteColor == const Color(0xffffffff)) {
-                          downvoteColor = const Color(0xffFF2A69);
-                          postLiked = min(postLiked - 1, 0);
-                        } else {
-                          downvoteColor = const Color(0xffffffff);
-                          postLiked += 1;
-                        }
-                      },
+                  Obx(() => IconButton(
+                      onPressed: controller.onDownvotePressed,
                       icon: Icon(
                         Icons.arrow_downward_outlined,
                         size: 16,
-                        color: downvoteColor,
-                      ))
+                        color: controller.downvoted.value
+                            ? const Color(0xffFF2A69)
+                            : Colors.black,
+                      )))
                 ],
               ),
               // Comment
@@ -164,7 +150,7 @@ class PostBottom extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: controller.onCommentsPressed,
                     //controller.commentPressed,
                     icon: const Icon(
                       Icons.comment,
@@ -183,6 +169,28 @@ class PostBottom extends StatelessWidget {
             ],
           )),
     );
+  }
+}
+
+class PostBottomController extends GetxController {
+  var postLiked = 0.obs;
+  final upvoted = false.obs;
+  final downvoted = false.obs;
+
+  int get totalPostLiked => postLiked.value + (upvoted.value ? 1 : 0) + (downvoted.value ? -1 : 0);
+
+  void onCommentsPressed() {
+    Get.toNamed(RouteNames.mainPost);
+  }
+
+  void onUpvotePressed() {
+    downvoted.value = false;
+    upvoted.value = !upvoted.value;
+  }
+
+  void onDownvotePressed() {
+    upvoted.value = false;
+    downvoted.value = !downvoted.value;
   }
 }
 

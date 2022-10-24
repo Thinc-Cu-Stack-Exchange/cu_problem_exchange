@@ -1,6 +1,7 @@
 import 'package:cu_problem_exchange/widget/drawer.dart';
 import 'package:cu_problem_exchange/widget/images_view.dart';
 import 'package:cu_problem_exchange/widget/post.dart';
+import 'package:cu_problem_exchange/widget/postmaterial.dart';
 import 'package:cu_problem_exchange/widget/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -95,5 +96,6 @@ class HomeBindings implements Bindings {
     // widget controllers
     Get.create(() => ImagesViewController());
     Get.create(() => PostController());
+    Get.create(() => PostBottomController());
   }
 }
