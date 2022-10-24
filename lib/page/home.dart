@@ -37,7 +37,7 @@ class Home extends GetView<HomeController> {
             body: ListView(
               children: [
                 CreatePost(
-                  userImage : AssetImage("assets/sample_user.png"),
+                  userImage : Image.asset("assets/sample_user.png"),
                   postTag : "PasaThai",
                   userName : "Poster1123456789234567823456789123456783456782345678",
                   postDate : "12/12/21",
@@ -48,7 +48,7 @@ class Home extends GetView<HomeController> {
                   postCommentCount : 69,
                 ),
                 CreatePost(
-                  userImage : AssetImage("assets/sample_user.png"),
+                  userImage : Image.asset("assets/sample_user.png"),
                   postTag : "PasaThai",
                   userName : "Poster1123456789234567823456789123456783456782345678",
                   postDate : "12/12/21",
@@ -57,7 +57,7 @@ class Home extends GetView<HomeController> {
                   postCommentCount : 69,
                 ),
                 CreatePost(
-                  userImage : AssetImage("assets/sample_user.png"),
+                  userImage : Image.asset("assets/sample_user.png"),
                   postTag : "PasaThai",
                   userName : "Poster1123456789234567823456789123456783456782345678",
                   postDate : "12/12/21",

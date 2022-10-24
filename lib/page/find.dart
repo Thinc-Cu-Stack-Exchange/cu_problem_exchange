@@ -106,9 +106,9 @@ class Find extends GetView<FindController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: const Color(0xffffffff),
       body: ColorfulSafeArea(
-        color: Color(0xffe897af),
+        color: const Color(0xffe897af),
         child: Column(
           children: [
             Container(

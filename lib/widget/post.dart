@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:cu_problem_exchange/widget/postmaterial.dart';
 
 class CreatePost extends StatelessWidget {
-  var userImage;
-  var postTag;
-  var userName;
-  var postDate;
-  var postTitle;
-  var postText;
+  Widget userImage;
+  String postTag;
+  String userName;
+  String postDate;
+  String postTitle;
+  String postText; // optional
   var postImage; // optional
   int postLiked;
   int postCommentCount;
@@ -26,21 +26,21 @@ class CreatePost extends StatelessWidget {
     required this.postLiked,
     required this.postCommentCount,
   });
-  final headerStyle = TextStyle(
+  final headerStyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 10,
     fontWeight: FontWeight.normal,
   );
-  var upvoteColor = Color(0xffffffff);
-  var downvoteColor = Color(0xffffffff);
+  var upvoteColor = const Color(0xffffffff);
+  var downvoteColor = const Color(0xffffffff);
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          color: Color(0xffffffff),
+          color: const Color(0xffffffff),
           child: SizedBox(
             width: context.width*0.90,
             child: Column(
@@ -60,7 +60,7 @@ class CreatePost extends StatelessWidget {
                         child: TextButton(
                           onPressed: () {},
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(0)),
+                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.all(0)),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,12 +78,12 @@ class CreatePost extends StatelessWidget {
                   ],
                 ),
                 // Spacing
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 // Bottom
                 Container(
-                  color: Color(0xffe897af),
+                  color: const Color(0xffe897af),
                   child: SizedBox(
                     height: 30,
                     child: Row(
@@ -96,11 +96,11 @@ class CreatePost extends StatelessWidget {
                             // Upvote icon
                             IconButton(
                                 onPressed: () {
-                                  if (upvoteColor == Color(0xffffffff)) {
-                                    upvoteColor = Color(0xff00B2FF);
+                                  if (upvoteColor == const Color(0xffffffff)) {
+                                    upvoteColor = const Color(0xff00B2FF);
                                     postLiked += 1;
                                   } else {
-                                    upvoteColor = Color(0xffffffff);
+                                    upvoteColor = const Color(0xffffffff);
                                     postLiked -= 1;
                                   }
                                 },
@@ -118,11 +118,11 @@ class CreatePost extends StatelessWidget {
                             // Downvote icon
                             IconButton(
                                 onPressed: () {
-                                  if (downvoteColor == Color(0xffffffff)) {
-                                    downvoteColor = Color(0xffFF2A69);
+                                  if (downvoteColor == const Color(0xffffffff)) {
+                                    downvoteColor = const Color(0xffFF2A69);
                                     postLiked = min(postLiked - 1,  0);
                                   } else {
-                                    downvoteColor = Color(0xffffffff);
+                                    downvoteColor = const Color(0xffffffff);
                                     postLiked += 1;
                                   }
                                 },
@@ -140,7 +140,7 @@ class CreatePost extends StatelessWidget {
                           children: [
                             TextButton.icon(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.comment,
                                   size: 16,
                                   color: Color(0xffffffff),

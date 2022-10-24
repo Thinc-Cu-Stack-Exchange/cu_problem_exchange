@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreatePostHeader extends StatelessWidget {
-  final userImage;
-  final postTag;
-  final userName;
-  final postDate;
-  final headerStyle = TextStyle(
+  final Widget userImage;
+  final String postTag;
+  final String userName;
+  final String postDate;
+  final TextStyle headerStyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 12,
     fontWeight: FontWeight.normal,
   );
 
-  CreatePostHeader({
+  const CreatePostHeader({
     super.key,
     required this.userImage,
     required this.userName,
@@ -28,12 +28,12 @@ class CreatePostHeader extends StatelessWidget {
         children: [
           // User Avatar
           CircleAvatar(
-            backgroundImage: userImage,
+            child: userImage,
             radius: 18,
           ),
           // User/Post info
           Padding(
-            padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -47,7 +47,7 @@ class CreatePostHeader extends StatelessWidget {
                       onPressed: () {},
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                            EdgeInsets.all(0)),
+                            const EdgeInsets.all(0)),
                       ),
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -92,14 +92,14 @@ class CreatePostHeader extends StatelessWidget {
 }
 
 class CreateTitle extends StatelessWidget {
-  final postTitle;
-  final bodystyle = TextStyle(
+  final String postTitle;
+  final bodystyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 18,
     fontWeight: FontWeight.normal,
   );
 
-  CreateTitle({super.key, required this.postTitle});
+  const CreateTitle({super.key, required this.postTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -115,20 +115,20 @@ class CreateTitle extends StatelessWidget {
 }
 
 class CreateText extends StatelessWidget {
-  final postText;
-  final bodystyle = TextStyle(
+  final String postText;
+  final bodystyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 16,
     fontWeight: FontWeight.normal,
   );
 
-  CreateText({super.key, required this.postText});
+  const CreateText({super.key, required this.postText});
 
   @override
   Widget build(BuildContext context) {
     return (postText != "")
         ? (Padding(
-            padding: EdgeInsets.symmetric(vertical: 7),
+            padding: const EdgeInsets.symmetric(vertical: 7),
             child: Text(
               postText,
               style: bodystyle.apply(fontSizeFactor: 0.95),
@@ -140,9 +140,9 @@ class CreateText extends StatelessWidget {
 }
 
 class CreateImage extends StatelessWidget {
-  var postImage;
+  final postImage;
 
-  CreateImage({super.key, required this.postImage});
+  const CreateImage({super.key, required this.postImage});
 
   @override
   Widget build(BuildContext context) {

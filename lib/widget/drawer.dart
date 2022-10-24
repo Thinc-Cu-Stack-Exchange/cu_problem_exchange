@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class CreateDrawer extends StatelessWidget {
   final double drawerWidth;
 
-  CreateDrawer({super.key,required this.drawerWidth});
+  const CreateDrawer({super.key,required this.drawerWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +83,11 @@ class CreateDrawer extends StatelessWidget {
 }
 
 class CreateTag extends StatelessWidget {
-  String tagname;
-  var iconSize = 20.0;
+  final String tagname;
+  final iconSize = 20.0;
   final double tagHeight = 30.0;
   final double frontMargin = 45;
-  bool deletableTag;
+  final bool deletableTag;
   CreateTag({super.key, required this.tagname, this.deletableTag = false});
 
   @override
