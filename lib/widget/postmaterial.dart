@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreatePostHeader extends StatelessWidget {
-  var userImage;
+  final userImage;
   final String postTag;
   final String userName;
   final String postDate;
@@ -12,7 +12,7 @@ class CreatePostHeader extends StatelessWidget {
     fontWeight: FontWeight.normal,
   );
 
-  CreatePostHeader({
+  const CreatePostHeader({
     super.key,
     required this.userImage,
     required this.userName,
@@ -91,26 +91,3 @@ class CreatePostHeader extends StatelessWidget {
   }
 }
 
-
-class CreateImage extends StatelessWidget {
-  final postImage;
-
-  const CreateImage({super.key, required this.postImage});
-
-  @override
-  Widget build(BuildContext context) {
-    printInfo(info: "width: ${context.width}");
-    return (postImage != "")
-        ? GestureDetector(
-            onDoubleTap: () {}, // Zoom
-            child: (SizedBox(
-              width: context.width * 0.90,
-              child: FittedBox(
-                fit: BoxFit.fitWidth,
-                child: postImage,
-              ),
-            )),
-          )
-        : Container();
-  }
-}

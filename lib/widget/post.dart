@@ -1,17 +1,20 @@
 import 'dart:math';
 
+import 'package:cu_problem_exchange/widget/postmaterial.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cu_problem_exchange/widget/postmaterial.dart';
 
-class Post extends StatelessWidget {
+import '../route_names.dart';
+import 'images_view.dart';
+
+class Post extends GetWidget<PostController> {
   var userImage;
   String postTag;
   String userName;
   String postDate;
   String postTitle;
   String postText; // optional
-  var postImage; // optional
+  RxList<ImageProvider> postImage; // optional
   int postLiked;
   int postCommentCount;
 
@@ -23,7 +26,7 @@ class Post extends StatelessWidget {
     required this.postDate,
     required this.postTitle,
     this.postText = "",
-    this.postImage = "",
+    required this.postImage,
     required this.postLiked,
     required this.postCommentCount,
   });
@@ -65,7 +68,7 @@ class Post extends StatelessWidget {
                       child: SizedBox(
                         width: context.width * 0.80,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: controller.bodyPressed,
                           style: ButtonStyle(
                             padding:
                                 MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -95,12 +98,11 @@ class Post extends StatelessWidget {
                                           vertical: 7),
                                       child: Text(
                                         postText,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Color(0xff000000),
                                           fontSize: 16,
                                           fontWeight: FontWeight.normal,
-                                        ).apply(
-                                            fontSizeFactor: 0.95),
+                                        ).apply(fontSizeFactor: 0.95),
                                         maxLines: 3,
                                       ),
                                     ))
@@ -111,15 +113,15 @@ class Post extends StatelessWidget {
                       ),
                     ),
                     // Img
-                    CreateImage(
-                      postImage: postImage,
+                    ImagesView(
+                      imageList: postImage,
                     ),
                   ],
                 ),
                 // Spacing
-                const SizedBox(
-                  height: 15,
-                ),
+                // const SizedBox(
+                //   height: 15,
+                // ),
                 // Bottom
                 Container(
                   color: const Color(0xffe897af),
@@ -177,7 +179,7 @@ class Post extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             TextButton.icon(
-                              onPressed: () {},
+                              onPressed: controller.commentPressed,
                               icon: const Icon(
                                 Icons.comment,
                                 size: 16,
@@ -202,5 +204,15 @@ class Post extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PostController extends GetxController {
+  void commentPressed() {
+    Get.toNamed(RouteNames.mainPost);
+  }
+
+  void bodyPressed() {
+    Get.toNamed(RouteNames.mainPost);
   }
 }
