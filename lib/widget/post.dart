@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cu_problem_exchange/widget/postmaterial.dart';
 
 class CreatePost extends StatelessWidget {
   var userImage;
@@ -8,9 +11,9 @@ class CreatePost extends StatelessWidget {
   var postDate;
   var postTitle;
   var postText;
-  var postImage;// optional
-  var postLiked;
-  var postCommentCount;
+  var postImage; // optional
+  int postLiked;
+  int postCommentCount;
   CreatePost({
     super.key,
     required this.userImage,
@@ -23,16 +26,13 @@ class CreatePost extends StatelessWidget {
     required this.postLiked,
     required this.postCommentCount,
   });
-  var headerStyle = TextStyle(
+  final headerStyle = TextStyle(
     color: Color(0xff000000),
     fontSize: 10,
     fontWeight: FontWeight.normal,
   );
-  var bodystyle = TextStyle(
-    color: Color(0xff000000),
-    fontSize: 18,
-    fontWeight: FontWeight.normal,
-  );
+  var upvoteColor = Color(0xffffffff);
+  var downvoteColor = Color(0xffffffff);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -47,83 +47,39 @@ class CreatePost extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Post Header
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: userImage,
-                        radius: 18,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 4),
-                              child: SizedBox(
-                                width: context.width * 0.50,
-                                child: Text(
-                                  postTag,
-                                  style: headerStyle.apply(fontWeightDelta: 3),
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: context.width * 0.50,
-                                  child: Text(
-                                    userName,
-                                    style: headerStyle,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                                  child: Text(
-                                    postDate,
-                                    style: headerStyle,
-                                    maxLines: 1,
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
+                CreatePostHeader(userImage: userImage, userName: userName, postTag: postTag, postDate: postDate),
+                // body post
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: context.width * 0.80,
+                        child: TextButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(0)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CreateTitle(postTitle: postTitle),
+                              // Text
+                              CreateText(postText: postText),
+                            ],
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                // Title
-                Padding(
-                  padding: EdgeInsets.fromLTRB(30, 0, 0, 15),
-                  child: SizedBox(
-                    width: context.width * 0.70,
-                    child: Text(
-                      postTitle,
-                      style: bodystyle.apply(fontWeightDelta: 2),
-                      maxLines: 2,
+                      ),
                     ),
-                  ),
-                ),
-                // Text
-                Padding(
-                  padding: EdgeInsets.fromLTRB(30, 0, 0, 15),
-                  child: SizedBox(
-                    width: context.width * 0.70,
-                    child: Text(
-                      postText,
-                      style: bodystyle.apply(fontSizeFactor: 0.95),
-                      maxLines: 3,
-                    ),
-                  ),
+                    // Img
+                    CreateImage(postImage: postImage,),
+                  ],
                 ),
                 // Spacing
                 SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
                 // Bottom
                 Container(
@@ -137,22 +93,43 @@ class CreatePost extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            // Upvote icon
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (upvoteColor == Color(0xffffffff)) {
+                                    upvoteColor = Color(0xff00B2FF);
+                                    postLiked += 1;
+                                  } else {
+                                    upvoteColor = Color(0xffffffff);
+                                    postLiked -= 1;
+                                  }
+                                },
                                 icon: Icon(
                                   Icons.arrow_upward_outlined,
                                   size: 16,
+                                  color: upvoteColor,
                                 )
                             ),
+                            // Liked post
                             Text(
                               postLiked.toString(),
                               style: headerStyle,
                             ),
+                            // Downvote icon
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (downvoteColor == Color(0xffffffff)) {
+                                    downvoteColor = Color(0xffFF2A69);
+                                    postLiked = min(postLiked - 1,  0);
+                                  } else {
+                                    downvoteColor = Color(0xffffffff);
+                                    postLiked += 1;
+                                  }
+                                },
                                 icon: Icon(
                                   Icons.arrow_downward_outlined,
                                   size: 16,
+                                  color: downvoteColor,
                                 )
                             )
                           ],
@@ -161,16 +138,17 @@ class CreatePost extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            IconButton(
-                                onPressed:() {},
+                            TextButton.icon(
+                                onPressed: () {},
                                 icon: Icon(
                                   Icons.comment,
                                   size: 16,
-                                )
-                            ),
-                            Text(
-                              (postCommentCount > 1) ? "$postCommentCount Comments" : "$postCommentCount Comment",
-                              style: headerStyle,
+                                  color: Color(0xffffffff),
+                                ),
+                                label: Text(
+                                  (postCommentCount > 1) ? "$postCommentCount Comments" : "$postCommentCount Comment",
+                                  style: headerStyle,
+                                ),
                             )
                           ],
                         ),
@@ -187,3 +165,7 @@ class CreatePost extends StatelessWidget {
     );
   }
 }
+
+
+
+

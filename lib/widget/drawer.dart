@@ -112,12 +112,7 @@ class CreateTag extends StatelessWidget {
           child: SizedBox(
             height: tagHeight,
             width: tagWidth,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: const Color(0xffffffff),
-              ),
-              child: TextButton(
+            child: TextButton(
                 onPressed: () {},
                 style: ButtonStyle(
                   alignment: Alignment.centerLeft, // <-- had to set alignment
@@ -140,7 +135,7 @@ class CreateTag extends StatelessWidget {
               ),
             ),
           ),
-        ),
+
 
       ],
     );
