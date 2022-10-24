@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cu_problem_exchange/widget/postmaterial.dart';
 
-class CreatePost extends StatelessWidget {
+class     Post extends StatelessWidget {
   Widget userImage;
   String postTag;
   String userName;
