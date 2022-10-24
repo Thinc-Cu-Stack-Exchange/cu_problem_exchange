@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class MainPost extends StatelessWidget {
+class MainPost extends GetView<MainPostController> {
   const MainPost({Key? key}) : super(key: key);
 
   @override
@@ -9,5 +10,17 @@ class MainPost extends StatelessWidget {
       body: Container(),
     );
   }
+}
+
+class MainPostBindings extends Bindings{
+  @override
+  void dependencies() {
+    Get.lazyPut(() => MainPostController());
+  }
+
+}
+
+class MainPostController extends GetxController{
+
 }
 
