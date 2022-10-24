@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImagesView extends GetWidget<ImagesViewController> {
-  final RxList<FileImage> imageList;
+  final RxList<ImageProvider> imageList;
 
   const ImagesView({super.key, required this.imageList});
 
