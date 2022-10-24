@@ -28,7 +28,11 @@ class FullImages extends GetView<FullImagesController> {
             Obx(() => Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  padding: const EdgeInsets.all(20.0),
+                  decoration: const BoxDecoration(
+                      color: Colors.black26,
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  margin: const EdgeInsets.only(bottom: 20, right: 10),
                   child: Text(
                     "${controller.currentIndex}/${Get.arguments.imageList.length}",
                     style: const TextStyle(
@@ -37,16 +41,21 @@ class FullImages extends GetView<FullImagesController> {
                   ),
                 ))),
             Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                padding: const EdgeInsets.only(top: 45, left: 7),
-                icon: const Icon(
-                  Icons.close,
-                  color: Colors.white,
-                ),
-                onPressed: controller.onClosePressed,
-              ),
-            )
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 45, left: 15),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.black26,
+                        shape: const CircleBorder()),
+                    onPressed: controller.onClosePressed,
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ))
           ],
         ),
       ),
