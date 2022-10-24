@@ -81,7 +81,7 @@ class MainPost extends GetView<MainPostController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Title(
+                        PostTitle(
                           postTitle: postTitle,
                         ),
                         PostText(
