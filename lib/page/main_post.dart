@@ -14,8 +14,8 @@ class MainPost extends GetView<MainPostController> {
       "Possakarnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn";
   String postText = "PsLs \nPsLs \nPSLS \nssssssss";
   Image postImage = Image.asset("sample_image.jpg"); // optional
-  int postLiked = 26;
-  int postCommentCount = 69;
+  int postVoted = 26;
+  int postAnswerCount = 69;
 
   MainPost({Key? key}) : super(key: key);
 
@@ -46,9 +46,9 @@ class MainPost extends GetView<MainPostController> {
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                   child: Text(
-                    "Write a comment...",
+                    "Write an answer...",
                     style: TextStyle(
-                      color: Color(0xff000000),
+                      color: Color(0xff4E4E4E),
                       fontSize: 16,
                     ),
                   ),
@@ -93,7 +93,7 @@ class MainPost extends GetView<MainPostController> {
                   ),
                   // bottom
                   PostBottom(
-                      postLiked: postLiked, postCommentCount: postCommentCount)
+                      postVoted: postVoted, postAnswerCount: postAnswerCount)
                 ],
               ),
             ),
@@ -107,7 +107,7 @@ class MainPost extends GetView<MainPostController> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                       child: Text(
-                        "Comment",
+                        (postAnswerCount == 1) ? "1 Answer" : "$postAnswerCount Answers",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -115,38 +115,42 @@ class MainPost extends GetView<MainPostController> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CreateComment(
+                          CreateAnswer(
                               userImg: userImage,
                               userName: userName,
-                              commentDate: "14/14/99",
-                              commentText: "commentText \nPassa ",
+                              answerDate: "14/14/99",
+                              answerText: "commentText \nPassa ",
                               reply_to: "Passao",
+                              answerVote: 20,
                           ),
-                          CreateComment(
+                          CreateAnswer(
                             userImg: userImage,
                             userName: userName,
-                            commentDate: "14/14/99",
-                            commentText: "commentText \nPassa ",
+                            answerDate: "14/14/99",
+                            answerText: "commentText \nPassa ",
                             reply_to: "Passao",
+                            answerVote: 20,
                           ),
-                          CreateComment(
+                          CreateAnswer(
                             userImg: userImage,
                             userName: userName,
-                            commentDate: "14/14/99",
-                            commentText: "commentText \nPassa ",
+                            answerDate: "14/14/99",
+                            answerText: "commentText \nPassa ",
                             reply_to: "Passao",
-                            commentImage: Image.asset("assets/sample_image.jpg"),
+                            answerImage: Image.asset("assets/sample_image.jpg"),
+                            answerVote: 20,
                           ),
-                          CreateComment(
+                          CreateAnswer(
                             userImg: userImage,
                             userName: userName,
-                            commentDate: "14/14/99",
-                            commentText: "commentTextssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+                            answerDate: "14/14/99",
+                            answerText: "commentTextssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
                             reply_to: "Passao",
+                            answerVote: 209999,
                           )
                         ],
                       ),
@@ -172,21 +176,25 @@ class MainPostBindings extends Bindings {
 class MainPostController extends GetxController {}
 
 
-class CreateComment extends StatelessWidget {
+class CreateAnswer extends StatelessWidget {
   var userImg;
   String userName;
-  String commentDate;
+  String answerDate;
   String reply_to;
-  String commentText;
-  var commentImage;
-  CreateComment({
+  String answerText;
+  var answerImage;
+  int answerVote;
+  bool showCommentBar;
+  CreateAnswer({
     super.key,
     required this.userImg,
     required this.userName,
-    required this.commentDate,
-    required this.commentText,
+    required this.answerDate,
+    required this.answerText,
     required this.reply_to,
-    this.commentImage = ""
+    this.answerImage = "",
+    required this.answerVote,
+    this.showCommentBar = false,
   });
   final TextStyle headerStyle = const TextStyle(
     color: Color(0xff000000),
@@ -196,18 +204,69 @@ class CreateComment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
           // Commenter Info
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
-                backgroundImage: userImg,
-                radius: 18,
+              // Up/Down Vote
+              Column(
+                children: [
+                  SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: FittedBox(
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.keyboard_arrow_up_outlined,
+                            size: 30,
+                          )
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 17,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          answerVote.toString(),
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
+                          maxLines: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: FittedBox(
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_outlined,
+                            size: 30,
+                          )
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              // Avatar
+              Padding(
+                padding: const EdgeInsets.fromLTRB(7, 0, 0, 0),
+                child: CircleAvatar(
+                  backgroundImage: userImg,
+                  radius: 18,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -228,7 +287,7 @@ class CreateComment extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                           child: Text(
-                            commentDate,
+                            answerDate,
                             style: headerStyle,
                             maxLines: 1,
                           ),
@@ -255,11 +314,11 @@ class CreateComment extends StatelessWidget {
 
           // Comment Text
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 15, 0, 15),
+            padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
             child: SizedBox(
               width: context.width - (2 * 15),
               child: Text(
-                commentText,
+                answerText,
                 style: const TextStyle(
                   color: Color(0xff000000),
                   fontSize: 16,
@@ -270,17 +329,47 @@ class CreateComment extends StatelessWidget {
           ) ,
 
           // Comment Img
-          (commentImage != "") ?
+          (answerImage != "") ?
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 0, 20),
+            padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
             child: SizedBox(
               width: context.width - 35,
               child: FittedBox(
-                child: commentImage,
+                child: answerImage,
               ),
             ),
           ) : Container(),
 
+          // Reply button
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffe897af),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: SizedBox(
+                  height: 20,
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.reply,
+                      size: 15,
+                    ),
+                    label: Text(
+                      "Reply",
+                      style: TextStyle(
+                        color: Color(0xffffffff),
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

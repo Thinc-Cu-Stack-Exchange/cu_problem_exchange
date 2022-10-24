@@ -93,8 +93,8 @@ class PostHeader extends StatelessWidget {
 }
 
 class PostBottom extends GetWidget<PostBottomController> {
-  final int postLiked;
-  final int postCommentCount;
+  final int postVoted;
+  final int postAnswerCount;
   final bottomStyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 10,
@@ -102,11 +102,11 @@ class PostBottom extends GetWidget<PostBottomController> {
   );
 
   const PostBottom(
-      {super.key, required this.postLiked, required this.postCommentCount});
+      {super.key, required this.postVoted, required this.postAnswerCount});
 
   @override
   Widget build(BuildContext context) {
-    controller.postLiked.value = postLiked;
+    controller.postLiked.value = postVoted;
     return Container(
       color: const Color(0xffe897af),
       child: SizedBox(
@@ -158,9 +158,9 @@ class PostBottom extends GetWidget<PostBottomController> {
                       color: Color(0xffffffff),
                     ),
                     label: Text(
-                      (postCommentCount > 1)
-                          ? "$postCommentCount Comments"
-                          : "$postCommentCount Comment",
+                      (postAnswerCount > 1)
+                          ? "$postAnswerCount Comments"
+                          : "$postAnswerCount Comment",
                       style: bottomStyle,
                     ),
                   )
