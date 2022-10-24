@@ -64,6 +64,7 @@ class Create extends GetView<CreateController> {
                         ),
                         ImagesView(
                           imageList: controller.imageList,
+                          backgroundColor: context.theme.backgroundColor,
                         ),
                       ],
                     ))),

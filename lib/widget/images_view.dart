@@ -5,8 +5,9 @@ import 'package:photo_view/photo_view.dart';
 
 class ImagesView extends GetWidget<ImagesViewController> {
   final RxList<ImageProvider> imageList;
+  final Color backgroundColor;
 
-  const ImagesView({super.key, required this.imageList});
+  const ImagesView({super.key, required this.imageList, this.backgroundColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,9 @@ class ImagesView extends GetWidget<ImagesViewController> {
                 itemCount: imageList.length,
                 itemBuilder: (ctx, index, _) => PhotoView(
                       backgroundDecoration:
-                          BoxDecoration(color: context.theme.backgroundColor),
+                          BoxDecoration(color: backgroundColor),
                       imageProvider: imageList[index],
-                      minScale: PhotoViewComputedScale.covered,
+                      minScale: PhotoViewComputedScale.contained,
                     ),
                 options: CarouselOptions(
                     viewportFraction: 1,
