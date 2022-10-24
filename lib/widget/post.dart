@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cu_problem_exchange/widget/postmaterial.dart';
 
-class CreatePost extends StatelessWidget {
+class Post extends StatelessWidget {
   var userImage;
   var postTag;
   var userName;
@@ -14,7 +14,7 @@ class CreatePost extends StatelessWidget {
   var postImage; // optional
   int postLiked;
   int postCommentCount;
-  CreatePost({
+  Post({
     super.key,
     required this.userImage,
     required this.postTag,
@@ -65,7 +65,18 @@ class CreatePost extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CreateTitle(postTitle: postTitle),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 7),
+                                child: Text(
+                                  postTitle,
+                                  style: const TextStyle(
+                                    color: Color(0xff000000),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                  maxLines: 2,
+                                ),
+                              ),
                               // Text
                               CreateText(postText: postText),
                             ],

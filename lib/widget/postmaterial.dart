@@ -91,36 +91,9 @@ class CreatePostHeader extends StatelessWidget {
   }
 }
 
-class CreateTitle extends StatelessWidget {
-  final postTitle;
-  final bodystyle = TextStyle(
-    color: Color(0xff000000),
-    fontSize: 18,
-    fontWeight: FontWeight.normal,
-  );
-
-  CreateTitle({super.key, required this.postTitle});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 7),
-      child: Text(
-        postTitle,
-        style: bodystyle.apply(fontWeightDelta: 2),
-        maxLines: 2,
-      ),
-    );
-  }
-}
-
 class CreateText extends StatelessWidget {
   final postText;
-  final bodystyle = TextStyle(
-    color: Color(0xff000000),
-    fontSize: 16,
-    fontWeight: FontWeight.normal,
-  );
+  final bodystyle = ;
 
   CreateText({super.key, required this.postText});
 
@@ -146,11 +119,12 @@ class CreateImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    printInfo(info: "width: ${context.width}");
     return (postImage != "")
         ? GestureDetector(
             onDoubleTap: () {}, // Zoom
             child: (SizedBox(
-              //width: context.width * 0.90,
+              width: context.width * 0.90,
               child: FittedBox(
                 fit: BoxFit.fitWidth,
                 child: postImage,
