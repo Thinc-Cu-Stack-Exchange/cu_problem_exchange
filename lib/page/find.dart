@@ -129,7 +129,7 @@ class Find extends GetView<FindController> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: const Color(0xffD2D2D2),
+                  color: const Color(0xffE7E7E7),
                 ),
                 child: Obx(() => TextField(
                       controller: controller.inputController,
