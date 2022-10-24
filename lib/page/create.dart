@@ -31,7 +31,7 @@ class Create extends GetView<CreateController> {
                           borderRadius:
                               BorderRadius.all(Radius.circular(40.0)))),
                   onPressed: () {},
-                  child: const Text("Next"),
+                  child: const Text("NEXT"),
                 )
               ],
             ),
