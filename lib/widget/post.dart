@@ -15,8 +15,8 @@ class Post extends GetWidget<PostController> {
   String postTitle;
   String postText; // optional
   RxList<ImageProvider> postImage; // optional
-  int postLiked;
-  int postCommentCount;
+  int postVoted;
+  int postAnswerCount;
 
   Post({
     super.key,
@@ -27,8 +27,8 @@ class Post extends GetWidget<PostController> {
     required this.postTitle,
     this.postText = "",
     required this.postImage,
-    required this.postLiked,
-    required this.postCommentCount,
+    required this.postVoted,
+    required this.postAnswerCount,
   });
 
   final headerStyle = const TextStyle(
@@ -120,7 +120,7 @@ class Post extends GetWidget<PostController> {
                 ),
 
                 // Bottom
-                PostBottom(postLiked: postLiked, postCommentCount: postCommentCount)
+                PostBottom(postVoted: postVoted, postAnswerCount: postAnswerCount)
               ],
             ),
           ),
