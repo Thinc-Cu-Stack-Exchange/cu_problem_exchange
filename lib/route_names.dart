@@ -3,4 +3,5 @@ class RouteNames{
   static const create = '/create';
   static const find = '/find';
   static const account = '/account';
+  static const mainPost = '/mainPost';
 }
