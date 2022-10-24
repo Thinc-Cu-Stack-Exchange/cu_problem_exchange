@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreatePostHeader extends StatelessWidget {
-  final Widget userImage;
+  var userImage;
   final String postTag;
   final String userName;
   final String postDate;
@@ -12,7 +12,7 @@ class CreatePostHeader extends StatelessWidget {
     fontWeight: FontWeight.normal,
   );
 
-  const CreatePostHeader({
+  CreatePostHeader({
     super.key,
     required this.userImage,
     required this.userName,
@@ -28,7 +28,7 @@ class CreatePostHeader extends StatelessWidget {
         children: [
           // User Avatar
           CircleAvatar(
-            child: userImage,
+            backgroundImage: userImage,
             radius: 18,
           ),
           // User/Post info
@@ -91,26 +91,6 @@ class CreatePostHeader extends StatelessWidget {
   }
 }
 
-class CreateText extends StatelessWidget {
-  final postText;
-  final bodystyle = ;
-
-  const CreateText({super.key, required this.postText});
-
-  @override
-  Widget build(BuildContext context) {
-    return (postText != "")
-        ? (Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7),
-            child: Text(
-              postText,
-              style: bodystyle.apply(fontSizeFactor: 0.95),
-              maxLines: 3,
-            ),
-          ))
-        : Container();
-  }
-}
 
 class CreateImage extends StatelessWidget {
   final postImage;
