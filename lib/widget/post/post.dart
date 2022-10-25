@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import './post_bottom.dart';
 import './post_header.dart';
+import '../../page/main_post.dart';
 import '../../route_names.dart';
 import '../images_view.dart';
 
@@ -38,6 +39,17 @@ class Post extends GetWidget<PostController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.createMainPostArguments = () => MainPostArguments(
+        userImage: userImage,
+        postTag: postTag,
+        userName: userName,
+        postDate: postDate,
+        postTitle: postTitle,
+        postText: postText,
+        postImage: postImage,
+        postVoted: postVoted,
+        postAnswerCount: postAnswerCount);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Align(
@@ -128,11 +140,13 @@ class Post extends GetWidget<PostController> {
 }
 
 class PostController extends GetxController {
+  late MainPostArguments Function() createMainPostArguments;
+
   void commentPressed() {
-    Get.toNamed(RouteNames.mainPost);
+    Get.toNamed(RouteNames.mainPost, arguments: createMainPostArguments.call());
   }
 
   void bodyPressed() {
-    Get.toNamed(RouteNames.mainPost);
+    Get.toNamed(RouteNames.mainPost, arguments: createMainPostArguments.call());
   }
 }

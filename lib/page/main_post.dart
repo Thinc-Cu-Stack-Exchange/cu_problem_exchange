@@ -3,45 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../widget/drawer.dart';
+import '../widget/images_view.dart';
 import '../widget/post/answer.dart';
-import '../widget/tabbar.dart';
-import '../widget/post/post_image.dart';
 import '../widget/post/post_bottom.dart';
 import '../widget/post/post_header.dart';
 import '../widget/post/post_text.dart';
 import '../widget/post/post_title.dart';
+import '../widget/tabbar.dart';
 
 class MainPost extends GetView<MainPostController> {
-  var userImage = AssetImage("assets/sample_user.png");
-  String postTag = "PassaThai";
-  String userName = "Poster1123456789234567823456789123456783456782345678";
-  String postDate = "12/12/21";
-  String postTitle =
-      "Possakarnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn";
-  String postText = "PsLs \nPsLs \nPSLS \nssssssss";
-  Image postImage = Image.asset("sample_image.jpg"); // optional
-  int postVoted = 26;
-  int postAnswerCount = 69;
-
   MainPost({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    MainPostArguments arguments = Get.arguments;
     return Scaffold(
       appBar: CustomTopBar(
-        tag: postTag,
+        tag: arguments.postTag,
       ),
       drawer: CreateDrawer(
         drawerWidth: context.width * 0.75,
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xffe897af),
+        color: const Color(0xffe897af),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
-              color: Color(0xffffffff),
+              color: Colors.white,
             ),
             child: SizedBox(
               width: 100,
@@ -50,8 +40,8 @@ class MainPost extends GetView<MainPostController> {
                 onPressed: () {},
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                  child: Text(
+                  padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                  child: const Text(
                     "Write an answer...",
                     style: TextStyle(
                       color: Color(0xff4E4E4E),
@@ -66,21 +56,21 @@ class MainPost extends GetView<MainPostController> {
       ),
       backgroundColor: const Color(0xffE7E7E7),
       body: ColorfulSafeArea(
-        color: Color(0xffe897af),
+        color: const Color(0xffe897af),
         child: ListView(
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Main Post
             Container(
-              color: Color(0xffffffff),
+              color: Colors.white,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PostHeader(
-                      userImage: userImage,
-                      userName: userName,
-                      postTag: postTag,
-                      postDate: postDate),
+                      userImage: arguments.userImage,
+                      userName: arguments.userName,
+                      postTag: arguments.postTag,
+                      postDate: arguments.postDate),
                   // body
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -88,35 +78,38 @@ class MainPost extends GetView<MainPostController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PostTitle(
-                          postTitle: postTitle,
+                          postTitle: arguments.postTitle,
                         ),
                         PostText(
-                          postText: postText,
+                          postText: arguments.postText,
                         ),
-                        PostImage(),
+                        ImagesView(
+                            imageList: arguments.postImage,
+                            backgroundColor: Colors.white),
                       ],
                     ),
                   ),
                   // bottom
                   PostBottom(
-                      postVoted: postVoted, postAnswerCount: postAnswerCount)
+                      postVoted: arguments.postVoted,
+                      postAnswerCount: arguments.postAnswerCount)
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Container(
-                color: Color(0xffffffff),
+                color: const Color(0xffffffff),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                       child: Text(
-                        (postAnswerCount == 1)
+                        (arguments.postAnswerCount == 1)
                             ? "1 Answer"
-                            : "$postAnswerCount Answers",
-                        style: TextStyle(
+                            : "${arguments.postAnswerCount} Answers",
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
@@ -129,24 +122,24 @@ class MainPost extends GetView<MainPostController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Answer(
-                            userImg: userImage,
-                            userName: userName,
+                            userImg: arguments.userImage,
+                            userName: arguments.userName,
                             answerDate: "14/14/99",
                             answerText: "commentText \nPassa ",
                             reply_to: "Passao",
                             answerVote: 20,
                           ),
                           Answer(
-                            userImg: userImage,
-                            userName: userName,
+                            userImg: arguments.userImage,
+                            userName: arguments.userName,
                             answerDate: "14/14/99",
                             answerText: "commentText \nPassa ",
                             reply_to: "Passao",
                             answerVote: 20,
                           ),
                           Answer(
-                            userImg: userImage,
-                            userName: userName,
+                            userImg: arguments.userImage,
+                            userName: arguments.userName,
                             answerDate: "14/14/99",
                             answerText: "commentText \nPassa ",
                             reply_to: "Passao",
@@ -154,8 +147,8 @@ class MainPost extends GetView<MainPostController> {
                             answerVote: 20,
                           ),
                           Answer(
-                            userImg: userImage,
-                            userName: userName,
+                            userImg: arguments.userImage,
+                            userName: arguments.userName,
                             answerDate: "14/14/99",
                             answerText:
                                 "commentTextssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
@@ -180,10 +173,33 @@ class MainPostBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => MainPostController());
-
   }
 }
 
 class MainPostController extends GetxController {}
 
+class MainPostArguments {
+  final ImageProvider userImage; // = AssetImage("assets/sample_user.png");
+  final String postTag; // = "PassaThai";
+  final String
+      userName; // = "Poster1123456789234567823456789123456783456782345678";
+  final String postDate; // = "12/12/21";
+  final String
+      postTitle; // = "Possakarnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn";
+  final String postText; // = "PsLs \nPsLs \nPSLS \nssssssss";
+  final RxList<ImageProvider>
+      postImage; // = Image.asset("sample_image.jpg"); // optional
+  final int postVoted; // = 26;
+  final int postAnswerCount;
 
+  MainPostArguments(
+      {required this.userImage,
+      required this.postTag,
+      required this.userName,
+      required this.postDate,
+      required this.postTitle,
+      required this.postText,
+      required this.postImage,
+      required this.postVoted,
+      required this.postAnswerCount});
+}
