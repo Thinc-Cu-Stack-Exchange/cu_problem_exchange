@@ -136,34 +136,46 @@ class MainPost extends GetView<MainPostController> {
                               userName: arguments.userName,
                               answerDate: "14/14/99",
                               answerText: "commentText \nPassa ",
-                              reply_to: "Passao",
                               answerVote: 20,
                             ),
-                            Comment(),
+                            Comment(
+                                userImage: AssetImage("assets/sample_user.png"),
+                                commentText:
+                          "commenttesssssssssssssssssssssssssssssssssssssssssssssssssssssxt1",
+                                userName: "username007x",
+                                commentDate: "12/12/12",
+                                reply_to: "meen007x",
+                                commentImage: Image.asset("assets/sample_image.jpg"),
+                            ),
                             Answer(
                               userImg: arguments.userImage,
                               userName: arguments.userName,
                               answerDate: "14/14/99",
                               answerText: "commentText \nPassa ",
-                              reply_to: "Passao",
                               answerVote: 20,
+                            ),
+                            Comment(
+                              userImage: AssetImage("assets/sample_user.png"),
+                              commentText:
+                              "commenttesssssssssssssssssssssssssssssssssssssssssssssssssssssxt1",
+                              userName: "username007x",
+                              commentDate: "12/12/12",
+                              reply_to: "assadas",
                             ),
                             Answer(
                               userImg: arguments.userImage,
                               userName: arguments.userName,
                               answerDate: "14/14/99",
                               answerText: "commentText \nPassa ",
-                              reply_to: "Passao",
                               answerImage: Image.asset("assets/sample_image.jpg"),
                               answerVote: 20,
                             ),
                             Answer(
                               userImg: arguments.userImage,
-                              userName: "ajfkfffffffffffffffffffffffffffffffffffffffff",
+                              userName: "ajfkffsgggggfffffffffffff",
                               answerDate: "14/14/99",
                               answerText:
                                   "commentTextssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
-                              reply_to: "Passao",
                               answerVote: 209999,
                             )
                           ],
