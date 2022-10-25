@@ -11,6 +11,7 @@ import '../widget/post/post_text.dart';
 import '../widget/post/post_title.dart';
 import '../widget/tabbar.dart';
 import 'package:cu_problem_exchange/route_names.dart';
+import '../widget/post/comment.dart';
 
 class MainPost extends GetView<MainPostController> {
   MainPost({Key? key}) : super(key: key);
@@ -101,6 +102,8 @@ class MainPost extends GetView<MainPostController> {
                 ],
               ),
             ),
+
+            // Answer
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Container(
@@ -134,6 +137,7 @@ class MainPost extends GetView<MainPostController> {
                             reply_to: "Passao",
                             answerVote: 20,
                           ),
+                          Comment(),
                           Answer(
                             userImg: arguments.userImage,
                             userName: arguments.userName,
