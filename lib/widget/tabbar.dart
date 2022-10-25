@@ -5,11 +5,12 @@ import 'package:get/get.dart';
 class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String tag;
   final double height;
-
+  final bool isHome;
   const CustomTopBar({
     super.key,
     required this.tag,
     this.height = kToolbarHeight,
+    this.isHome = false,
   });
 
   @override
@@ -46,6 +47,30 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () => Scaffold.of(context).openDrawer(),
       ),
       actions: [
+        // Favorite
+        (!isHome) ? IconButton(
+          padding: const EdgeInsets.all(4),
+          onPressed: () {
+            Get.toNamed(RouteNames.home);
+          } ,
+          icon: const Icon(
+            Icons.home,
+            color: Color(0xffffffff),
+          ),
+          iconSize: 20,
+        ) : Container(),
+        // Home
+        (!isHome) ? IconButton(
+          padding: const EdgeInsets.all(4),
+          onPressed: () {
+
+          } ,
+          icon: const Icon(
+            Icons.star_border_outlined,
+            color: Color(0xffffffff),
+          ),
+          iconSize: 20,
+        ) : Container(),
         IconButton(
           padding: const EdgeInsets.all(4),
           onPressed: () {

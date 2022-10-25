@@ -19,11 +19,13 @@ class Home extends GetView<HomeController> {
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-          appBar: const CustomTopBar(
+          appBar: CustomTopBar(
             tag: 'Home',
+            isHome: true,
           ),
           drawer: CreateDrawer(
             drawerWidth: drawerWidth,
+
           ),
           bottomNavigationBar: const CustomBotBar(),
           backgroundColor: const Color(0xffE7E7E7),

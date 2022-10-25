@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cu_problem_exchange/route_names.dart';
 
 class Comment extends StatelessWidget {
   var userImage ;
@@ -92,6 +93,39 @@ class Comment extends StatelessWidget {
                   ),
                 )
               : Container(),
+
+          // Reply Button
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xffe897af),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: SizedBox(
+                  height: 20,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Get.toNamed(RouteNames.createReply);
+                    },
+                    icon: const Icon(
+                      Icons.reply,
+                      size: 15,
+                    ),
+                    label: const Text(
+                      "Reply",
+                      style: TextStyle(
+                        color: Color(0xffffffff),
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
