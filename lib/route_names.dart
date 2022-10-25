@@ -6,4 +6,5 @@ class RouteNames{
   static const mainPost = '/mainPost';
   static const fullImage = '/fullImage';
   static const createReply = '/createReply';
+  static const createAnswer = '/createAnswer';
 }

@@ -1,5 +1,6 @@
 import 'package:cu_problem_exchange/page/account.dart';
 import 'package:cu_problem_exchange/page/create.dart';
+import 'package:cu_problem_exchange/page/create_answer.dart';
 import 'package:cu_problem_exchange/page/find.dart';
 import 'package:cu_problem_exchange/page/full_image.dart';
 import 'package:cu_problem_exchange/page/home.dart';
@@ -51,6 +52,11 @@ void main() => runApp(GetMaterialApp(
             name: RouteNames.createReply,
             page: () => CreateReply(),
             binding: CreateReplyBindings(),
+        ),
+        GetPage(
+          name: RouteNames.createAnswer,
+          page: () => CreateAnswer(),
+          binding: CreateReplyBindings(),
         )
       ],
     ));

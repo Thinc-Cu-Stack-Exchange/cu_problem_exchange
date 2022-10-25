@@ -27,7 +27,7 @@ class CreateReply extends StatelessWidget {
                           borderRadius:
                           BorderRadius.all(Radius.circular(40.0)))),
                   onPressed: () {},
-                  child: const Text("Post"),
+                  child: const Text("POST"),
                 )
               ],
             ),

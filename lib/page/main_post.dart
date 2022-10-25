@@ -10,6 +10,7 @@ import '../widget/post/post_header.dart';
 import '../widget/post/post_text.dart';
 import '../widget/post/post_title.dart';
 import '../widget/tabbar.dart';
+import 'package:cu_problem_exchange/route_names.dart';
 
 class MainPost extends GetView<MainPostController> {
   MainPost({Key? key}) : super(key: key);
@@ -37,7 +38,9 @@ class MainPost extends GetView<MainPostController> {
               width: 100,
               height: 40,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(RouteNames.createAnswer);
+                },
                 child: Container(
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
