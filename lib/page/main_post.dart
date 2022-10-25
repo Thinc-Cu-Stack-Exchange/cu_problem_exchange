@@ -108,66 +108,69 @@ class MainPost extends GetView<MainPostController> {
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Container(
                 color: const Color(0xffffffff),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      child: Text(
-                        (arguments.postAnswerCount == 1)
-                            ? "1 Answer"
-                            : "${arguments.postAnswerCount} Answers",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Text(
+                          (arguments.postAnswerCount == 1)
+                              ? "1 Answer"
+                              : "${arguments.postAnswerCount} Answers",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Answer(
-                            userImg: arguments.userImage,
-                            userName: arguments.userName,
-                            answerDate: "14/14/99",
-                            answerText: "commentText \nPassa ",
-                            reply_to: "Passao",
-                            answerVote: 20,
-                          ),
-                          Comment(),
-                          Answer(
-                            userImg: arguments.userImage,
-                            userName: arguments.userName,
-                            answerDate: "14/14/99",
-                            answerText: "commentText \nPassa ",
-                            reply_to: "Passao",
-                            answerVote: 20,
-                          ),
-                          Answer(
-                            userImg: arguments.userImage,
-                            userName: arguments.userName,
-                            answerDate: "14/14/99",
-                            answerText: "commentText \nPassa ",
-                            reply_to: "Passao",
-                            answerImage: Image.asset("assets/sample_image.jpg"),
-                            answerVote: 20,
-                          ),
-                          Answer(
-                            userImg: arguments.userImage,
-                            userName: arguments.userName,
-                            answerDate: "14/14/99",
-                            answerText:
-                                "commentTextssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
-                            reply_to: "Passao",
-                            answerVote: 209999,
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Answer(
+                              userImg: arguments.userImage,
+                              userName: arguments.userName,
+                              answerDate: "14/14/99",
+                              answerText: "commentText \nPassa ",
+                              reply_to: "Passao",
+                              answerVote: 20,
+                            ),
+                            Comment(),
+                            Answer(
+                              userImg: arguments.userImage,
+                              userName: arguments.userName,
+                              answerDate: "14/14/99",
+                              answerText: "commentText \nPassa ",
+                              reply_to: "Passao",
+                              answerVote: 20,
+                            ),
+                            Answer(
+                              userImg: arguments.userImage,
+                              userName: arguments.userName,
+                              answerDate: "14/14/99",
+                              answerText: "commentText \nPassa ",
+                              reply_to: "Passao",
+                              answerImage: Image.asset("assets/sample_image.jpg"),
+                              answerVote: 20,
+                            ),
+                            Answer(
+                              userImg: arguments.userImage,
+                              userName: "ajfkfffffffffffffffffffffffffffffffffffffffff",
+                              answerDate: "14/14/99",
+                              answerText:
+                                  "commentTextssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+                              reply_to: "Passao",
+                              answerVote: 209999,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             )
