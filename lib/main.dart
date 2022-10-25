@@ -55,8 +55,8 @@ void main() => runApp(GetMaterialApp(
         ),
         GetPage(
           name: RouteNames.createAnswer,
-          page: () => CreateAnswer(),
-          binding: CreateReplyBindings(),
+          page: () => const CreateAnswer(),
+          binding: CreateAnswerBindings(),
         )
       ],
     ));

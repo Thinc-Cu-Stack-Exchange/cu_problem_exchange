@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
-import '../route_names.dart';
-import '../widget/images_view.dart';
 
-class CreateAnswer extends StatelessWidget {
+class CreateAnswer extends GetView<CreateAnswerController> {
   const CreateAnswer({Key? key}) : super(key: key);
 
   @override
@@ -21,14 +17,14 @@ class CreateAnswer extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.close),
-                    onPressed: () {},
+                    onPressed: controller.closePressed,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         shape: const RoundedRectangleBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(40.0)))),
+                                BorderRadius.all(Radius.circular(40.0)))),
                     onPressed: () {},
                     child: const Text("POST"),
                   )
@@ -58,7 +54,7 @@ class CreateAnswer extends StatelessWidget {
                         ],
                       ))),
               ElevatedButton(
-                  onPressed: () {} ,
+                  onPressed: () {},
                   child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Row(
@@ -91,4 +87,8 @@ class CreateAnswerBindings extends Bindings {
   }
 }
 
-class CreateAnswerController extends GetxController {}
+class CreateAnswerController extends GetxController {
+  void closePressed() {
+    Get.back();
+  }
+}

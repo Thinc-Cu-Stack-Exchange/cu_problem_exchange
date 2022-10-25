@@ -1,3 +1,4 @@
+import 'package:cu_problem_exchange/page/main_post.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -99,5 +100,8 @@ class HomeBindings implements Bindings {
     Get.create(() => PostController());
     Get.create(() => PostBottomController());
     Get.create(() => AnswerController());
+
+    // datas
+    Get.put(MainPostArgumentsHolder());
   }
 }

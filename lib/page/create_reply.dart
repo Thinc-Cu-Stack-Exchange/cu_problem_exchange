@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cu_problem_exchange/widget/images_view.dart';
 
-class CreateReply extends StatelessWidget {
+class CreateReply extends GetWidget<CreateReplyController> {
   String reply_to = "meen";
   CreateReply({super.key});
 

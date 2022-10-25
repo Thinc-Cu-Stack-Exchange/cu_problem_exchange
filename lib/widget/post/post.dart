@@ -143,9 +143,12 @@ class Post extends GetWidget<PostController> {
 }
 
 class PostController extends GetxController {
-  late MainPostArguments Function() createMainPostArguments;
+  MainPostArguments Function()? createMainPostArguments;
 
   void bodyPressed() {
-    Get.toNamed(RouteNames.mainPost, arguments: createMainPostArguments());
+    if (createMainPostArguments != null) {
+      Get.find<MainPostArgumentsHolder>().arguments = createMainPostArguments!();
+    }
+    Get.toNamed(RouteNames.mainPost);
   }
 }

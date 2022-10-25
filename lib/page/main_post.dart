@@ -18,7 +18,7 @@ class MainPost extends GetView<MainPostController> {
 
   @override
   Widget build(BuildContext context) {
-    MainPostArguments arguments = Get.arguments;
+    final arguments = Get.find<MainPostArgumentsHolder>().arguments!;
     return Scaffold(
       appBar: CustomTopBar(
         tag: arguments.postTag,
@@ -211,4 +211,8 @@ class MainPostArguments {
       required this.postImage,
       required this.postVoted,
       required this.postAnswerCount});
+}
+
+class MainPostArgumentsHolder{
+  MainPostArguments? arguments;
 }

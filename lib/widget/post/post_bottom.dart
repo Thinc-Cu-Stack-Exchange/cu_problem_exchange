@@ -8,18 +8,18 @@ import '../../route_names.dart';
 class PostBottom extends GetWidget<PostBottomController> {
   final int postVoted;
   final int postAnswerCount;
-  final MainPostArguments Function() createMainPostArguments;
+  MainPostArguments Function()? createMainPostArguments;
   final bottomStyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 10,
     fontWeight: FontWeight.normal,
   );
 
-  const PostBottom(
+  PostBottom(
       {super.key,
       required this.postVoted,
       required this.postAnswerCount,
-        required this.createMainPostArguments});
+      this.createMainPostArguments});
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +93,12 @@ class PostBottom extends GetWidget<PostBottomController> {
 
 class PostBottomController extends GetxController {
   final voteController = VoteController();
-  late MainPostArguments Function() createMainPostArguments;
+  MainPostArguments Function()? createMainPostArguments;
 
   void onCommentsPressed() {
-    Get.toNamed(RouteNames.mainPost, arguments: createMainPostArguments());
+    if (createMainPostArguments != null) {
+      Get.find<MainPostArgumentsHolder>().arguments = createMainPostArguments!();
+    }
+    Get.toNamed(RouteNames.mainPost);
   }
 }
