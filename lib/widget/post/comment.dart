@@ -2,49 +2,96 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Comment extends StatelessWidget {
-  var userImg = AssetImage("assets/sample_user.png");
-  String commentText = "commenttesssssssssssssssssssssssssssssssssssssssssssssssssxt1";
-  String userName = "jlksgij";
-  String commentDate = "12/12/12";
-  Comment({Key? key}) : super(key: key);
+  var userImage ;
+  String commentText ;
+  String userName ;
+  String commentDate ;
+  String reply_to;
+  var commentImage ;
+
+  Comment({
+    super.key,
+    required this.userImage,
+    required this.commentText,
+    required this.userName,
+    required this.commentDate,
+    required this.reply_to,
+    this.commentImage = "",
+});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 50),
+      padding: EdgeInsets.fromLTRB(50, 0, 20, 0),
       //color: Colors.red,
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            backgroundImage: userImg,
-            radius: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              children: [
-                SizedBox(
-                  //width: context.width * 0.6,
-                  child: Text(
-                    userName,
-                    style: TextStyle(
-                      fontSize: 10,
+          // User Info
+          Row(
+            children: [
+              CircleAvatar(
+                backgroundImage: userImage,
+                radius: 14,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: SizedBox(
+                        width: context.width * 0.45,
+                        child: Text(
+                          userName,
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ),
                     ),
-                    maxLines: 1,
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                      child: Text(
+                        commentDate,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    commentDate,
-                    style: TextStyle(
-                      fontSize: 10,
+              ),
+            ],
+          ),
+
+
+          // Comment Text
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              "@$reply_to\n$commentText",
+              style: TextStyle(
+                fontSize: 11,
+              ),
+            ),
+          ),
+
+          // Comment Img
+          (commentImage != "")
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: SizedBox(
+                    width: context.width - 35,
+                    child: FittedBox(
+                      child: commentImage,
                     ),
                   ),
                 )
-              ],
-            ),
-          ),
+              : Container(),
         ],
       ),
     );

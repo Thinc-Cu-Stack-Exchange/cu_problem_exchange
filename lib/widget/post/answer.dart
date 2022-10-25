@@ -8,7 +8,6 @@ class Answer extends GetWidget<AnswerController> {
   var userImg;
   String userName;
   String answerDate;
-  String reply_to;
   String answerText;
   var answerImage;
   int answerVote;
@@ -20,7 +19,6 @@ class Answer extends GetWidget<AnswerController> {
     required this.userName,
     required this.answerDate,
     required this.answerText,
-    required this.reply_to,
     this.answerImage = "",
     required this.answerVote,
     this.showCommentBar = false,
@@ -112,22 +110,27 @@ class Answer extends GetWidget<AnswerController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width: context.width * 0.45,
-                          child: Text(
-                            userName,
-                            style: headerStyle,
-                            maxLines: 1,
+                        Padding(
+                          padding: EdgeInsets.only(left: 8),
+                          child: SizedBox(
+                            width: context.width * 0.45,
+                            child: Text(
+                              userName,
+                              style: headerStyle,
+                              maxLines: 1,
+                            ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(8, 5, 0, 0),
                           child: Text(
                             answerDate,
-                            style: headerStyle,
+                            style: headerStyle.apply(
+                              color: Colors.grey,
+                            ),
                             maxLines: 1,
                           ),
                         ),
