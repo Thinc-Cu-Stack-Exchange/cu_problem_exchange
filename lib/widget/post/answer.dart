@@ -1,3 +1,4 @@
+import 'package:cu_problem_exchange/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,49 +48,53 @@ class Answer extends GetWidget<AnswerController> {
               Column(
                 children: [
                   SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: FittedBox(
-                      child: IconButton(
-                          onPressed: controller.voteController.toggleUpvote,
-                          icon: Obx(() => Icon(
-                            Icons.keyboard_arrow_up_outlined,
-                            color: controller.voteController.upvoted.value
-                                ? const Color(0xff00B2FF)
-                                : Colors.black,
-                            size: 30,
-                          ))),
+                    width: 15,
+                    height: 15,
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: FittedBox(
+                        child: IconButton(
+                            onPressed: controller.voteController.toggleUpvote,
+                            icon: Obx(() => Icon(
+                                  Icons.keyboard_arrow_up_outlined,
+                                  color: controller.voteController.upvoted.value
+                                      ? const Color(0xff00B2FF)
+                                      : Colors.black,
+                                  size: 35,
+                                ))),
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
                     child: SizedBox(
                       width: 17,
                       child: Align(
                         alignment: Alignment.center,
                         child: Obx(() => Text(
-                          controller.voteController.totalUpvotes.toString(),
-                          style: const TextStyle(
-                            fontSize: 10,
-                          ),
-                          maxLines: 2,
-                        )),
+                              controller.voteController.totalUpvotes.toString(),
+                              style: const TextStyle(
+                                fontSize: 10,
+                              ),
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                            )),
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: 20,
-                    height: 20,
+                    width: 15,
+                    height: 15,
                     child: FittedBox(
                       child: IconButton(
                           onPressed: controller.voteController.toggleDownvote,
                           icon: Obx(() => Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            color: controller.voteController.downvoted.value
-                                ? const Color(0xffFF2A69)
-                                : Colors.black,
-                            size: 30,
-                          ))),
+                                Icons.keyboard_arrow_down_outlined,
+                                color: controller.voteController.downvoted.value
+                                    ? const Color(0xffFF2A69)
+                                    : Colors.black,
+                                size: 35,
+                              ))),
                     ),
                   )
                 ],
@@ -128,17 +133,17 @@ class Answer extends GetWidget<AnswerController> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: SizedBox(
-                        width: context.width * 0.50,
-                        child: Text(
-                          "@$reply_to",
-                          style: headerStyle,
-                          maxLines: 1,
-                        ),
-                      ),
-                    )
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 5),
+                    //   child: SizedBox(
+                    //     width: context.width * 0.50,
+                    //     child: Text(
+                    //       "@$reply_to",
+                    //       style: headerStyle,
+                    //       maxLines: 1,
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
               ),
@@ -164,14 +169,14 @@ class Answer extends GetWidget<AnswerController> {
           // Comment Img
           (answerImage != "")
               ? Padding(
-            padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
-            child: SizedBox(
-              width: context.width - 35,
-              child: FittedBox(
-                child: answerImage,
-              ),
-            ),
-          )
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: SizedBox(
+                    width: context.width - 35,
+                    child: FittedBox(
+                      child: answerImage,
+                    ),
+                  ),
+                )
               : Container(),
 
           // Reply button
@@ -187,7 +192,9 @@ class Answer extends GetWidget<AnswerController> {
                 child: SizedBox(
                   height: 20,
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(RouteNames.createReply);
+                    },
                     icon: const Icon(
                       Icons.reply,
                       size: 15,

@@ -5,6 +5,7 @@ import 'package:cu_problem_exchange/page/full_image.dart';
 import 'package:cu_problem_exchange/page/home.dart';
 import 'package:cu_problem_exchange/page/main_post.dart';
 import 'package:cu_problem_exchange/route_names.dart';
+import 'package:cu_problem_exchange/page/create_reply.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,6 +46,11 @@ void main() => runApp(GetMaterialApp(
           name: RouteNames.fullImage,
           page: () => const FullImages(),
           binding: FullImagesBindings()
+        ),
+        GetPage(
+            name: RouteNames.createReply,
+            page: () => CreateReply(),
+            binding: CreateReplyBindings(),
         )
       ],
     ));

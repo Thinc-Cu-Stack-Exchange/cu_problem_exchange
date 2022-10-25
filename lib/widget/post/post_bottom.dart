@@ -78,8 +78,8 @@ class PostBottom extends GetWidget<PostBottomController> {
                     ),
                     label: Text(
                       (postAnswerCount > 1)
-                          ? "$postAnswerCount Comments"
-                          : "$postAnswerCount Comment",
+                          ? "$postAnswerCount Answers"
+                          : "$postAnswerCount Answer",
                       style: bottomStyle,
                     ),
                   )
