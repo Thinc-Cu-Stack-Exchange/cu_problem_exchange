@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
-import 'package:cu_problem_exchange/widget/tabbar.dart';
 import 'package:cu_problem_exchange/widget/drawer.dart';
 import 'package:cu_problem_exchange/widget/postmaterial.dart';
+import 'package:cu_problem_exchange/widget/tabbar.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainPost extends GetView<MainPostController> {
@@ -31,7 +31,7 @@ class MainPost extends GetView<MainPostController> {
       bottomNavigationBar: BottomAppBar(
         color: Color(0xffe897af),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
@@ -107,7 +107,9 @@ class MainPost extends GetView<MainPostController> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                       child: Text(
-                        (postAnswerCount == 1) ? "1 Answer" : "$postAnswerCount Answers",
+                        (postAnswerCount == 1)
+                            ? "1 Answer"
+                            : "$postAnswerCount Answers",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -115,19 +117,12 @@ class MainPost extends GetView<MainPostController> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CreateAnswer(
-                              userImg: userImage,
-                              userName: userName,
-                              answerDate: "14/14/99",
-                              answerText: "commentText \nPassa ",
-                              reply_to: "Passao",
-                              answerVote: 20,
-                          ),
-                          CreateAnswer(
+                          Answer(
                             userImg: userImage,
                             userName: userName,
                             answerDate: "14/14/99",
@@ -135,7 +130,15 @@ class MainPost extends GetView<MainPostController> {
                             reply_to: "Passao",
                             answerVote: 20,
                           ),
-                          CreateAnswer(
+                          Answer(
+                            userImg: userImage,
+                            userName: userName,
+                            answerDate: "14/14/99",
+                            answerText: "commentText \nPassa ",
+                            reply_to: "Passao",
+                            answerVote: 20,
+                          ),
+                          Answer(
                             userImg: userImage,
                             userName: userName,
                             answerDate: "14/14/99",
@@ -144,11 +147,12 @@ class MainPost extends GetView<MainPostController> {
                             answerImage: Image.asset("assets/sample_image.jpg"),
                             answerVote: 20,
                           ),
-                          CreateAnswer(
+                          Answer(
                             userImg: userImage,
                             userName: userName,
                             answerDate: "14/14/99",
-                            answerText: "commentTextssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+                            answerText:
+                                "commentTextssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
                             reply_to: "Passao",
                             answerVote: 209999,
                           )
@@ -175,8 +179,7 @@ class MainPostBindings extends Bindings {
 
 class MainPostController extends GetxController {}
 
-
-class CreateAnswer extends StatelessWidget {
+class Answer extends StatelessWidget {
   var userImg;
   String userName;
   String answerDate;
@@ -185,7 +188,8 @@ class CreateAnswer extends StatelessWidget {
   var answerImage;
   int answerVote;
   bool showCommentBar;
-  CreateAnswer({
+
+  Answer({
     super.key,
     required this.userImg,
     required this.userName,
@@ -196,19 +200,20 @@ class CreateAnswer extends StatelessWidget {
     required this.answerVote,
     this.showCommentBar = false,
   });
+
   final TextStyle headerStyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 12,
     fontWeight: FontWeight.normal,
   );
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // Commenter Info
           Row(
             //crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,8 +230,7 @@ class CreateAnswer extends StatelessWidget {
                           icon: Icon(
                             Icons.keyboard_arrow_up_outlined,
                             size: 30,
-                          )
-                      ),
+                          )),
                     ),
                   ),
                   Padding(
@@ -254,8 +258,7 @@ class CreateAnswer extends StatelessWidget {
                           icon: Icon(
                             Icons.keyboard_arrow_down_outlined,
                             size: 30,
-                          )
-                      ),
+                          )),
                     ),
                   )
                 ],
@@ -308,9 +311,8 @@ class CreateAnswer extends StatelessWidget {
                   ],
                 ),
               ),
-
             ],
-          ) ,
+          ),
 
           // Comment Text
           Padding(
@@ -326,19 +328,20 @@ class CreateAnswer extends StatelessWidget {
                 ).apply(fontSizeFactor: 0.95),
               ),
             ),
-          ) ,
+          ),
 
           // Comment Img
-          (answerImage != "") ?
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
-            child: SizedBox(
-              width: context.width - 35,
-              child: FittedBox(
-                child: answerImage,
-              ),
-            ),
-          ) : Container(),
+          (answerImage != "")
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: SizedBox(
+                    width: context.width - 35,
+                    child: FittedBox(
+                      child: answerImage,
+                    ),
+                  ),
+                )
+              : Container(),
 
           // Reply button
           Padding(
@@ -375,4 +378,3 @@ class CreateAnswer extends StatelessWidget {
     );
   }
 }
-
