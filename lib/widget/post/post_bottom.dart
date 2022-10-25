@@ -45,7 +45,7 @@ class PostBottom extends GetWidget<PostBottomController> {
                         size: 16,
                         color: controller.voteController.upvoted.value
                             ? const Color(0xff00B2FF)
-                            : Colors.black,
+                            : Colors.white,
                       ))),
                   // Liked post
                   Obx(() => Text(
@@ -60,7 +60,7 @@ class PostBottom extends GetWidget<PostBottomController> {
                         size: 16,
                         color: controller.voteController.downvoted.value
                             ? const Color(0xffFF2A69)
-                            : Colors.black,
+                            : Colors.white,
                       )))
                 ],
               ),
