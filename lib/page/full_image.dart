@@ -1,3 +1,4 @@
+import 'package:cu_problem_exchange/widget/images_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -8,7 +9,8 @@ class FullImages extends GetView<FullImagesController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.currentIndex.value = Get.arguments.initialIndex + 1;
+    FullImageArguments arguments = Get.arguments;
+    controller.currentIndex.value = arguments.initialIndex;
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(
@@ -18,11 +20,11 @@ class FullImages extends GetView<FullImagesController> {
           children: <Widget>[
             PhotoViewGallery.builder(
               pageController:
-                  PageController(initialPage: Get.arguments.initialIndex),
+                  PageController(initialPage: arguments.initialIndex),
               scrollPhysics: const BouncingScrollPhysics(),
               builder: (context, index) => PhotoViewGalleryPageOptions(
-                  imageProvider: Get.arguments.imageList[index]),
-              itemCount: Get.arguments.imageList.length,
+                  imageProvider: arguments.imageList[index]),
+              itemCount: arguments.imageList.length,
               onPageChanged: controller.onPageChanged,
             ),
             Obx(() => Align(
@@ -34,7 +36,7 @@ class FullImages extends GetView<FullImagesController> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   margin: const EdgeInsets.only(bottom: 20, right: 10),
                   child: Text(
-                    "${controller.currentIndex}/${Get.arguments.imageList.length}",
+                    "${controller.currentIndex}/${arguments.imageList.length}",
                     style: const TextStyle(
                       color: Colors.white,
                     ),
@@ -80,4 +82,11 @@ class FullImagesController extends GetxController {
   void onClosePressed() {
     Get.back();
   }
+}
+
+class FullImageArguments {
+  final RxList<ImageProvider> imageList;
+  final int initialIndex;
+
+  FullImageArguments({required this.imageList, required this.initialIndex});
 }

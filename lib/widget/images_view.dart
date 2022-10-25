@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../page/full_image.dart';
 import '../route_names.dart';
 
 class ImagesView extends GetWidget<ImagesViewController> {
@@ -69,13 +70,6 @@ class ImagesViewController extends GetxController {
   void onImageTapped() {
     Get.toNamed(RouteNames.fullImage,
         arguments: FullImageArguments(
-            imageList: imageList, initialIndex: showingImageIndex.value-1));
+            imageList: imageList, initialIndex: showingImageIndex.value));
   }
-}
-
-class FullImageArguments {
-  final RxList<ImageProvider> imageList;
-  final int initialIndex;
-
-  FullImageArguments({required this.imageList, required this.initialIndex});
 }
