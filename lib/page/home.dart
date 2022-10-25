@@ -1,12 +1,13 @@
-import 'package:cu_problem_exchange/widget/drawer.dart';
-import 'package:cu_problem_exchange/widget/images_view.dart';
-import 'package:cu_problem_exchange/widget/post.dart';
-import 'package:cu_problem_exchange/widget/postmaterial.dart';
-import 'package:cu_problem_exchange/widget/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../route_names.dart';
+import '../widget/drawer.dart';
+import '../widget/images_view.dart';
+import '../widget/post/answer.dart';
+import '../widget/post/post.dart';
+import '../widget/post/post_bottom.dart';
+import '../widget/tabbar.dart';
 
 class Home extends GetView<HomeController> {
   const Home({Key? key}) : super(key: key);
@@ -97,5 +98,6 @@ class HomeBindings implements Bindings {
     Get.create(() => ImagesViewController());
     Get.create(() => PostController());
     Get.create(() => PostBottomController());
+    Get.create(() => AnswerController());
   }
 }

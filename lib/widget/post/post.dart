@@ -1,11 +1,10 @@
-import 'dart:math';
-
-import 'package:cu_problem_exchange/widget/postmaterial.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../route_names.dart';
-import 'images_view.dart';
+import './post_bottom.dart';
+import './post_header.dart';
+import '../../route_names.dart';
+import '../images_view.dart';
 
 class Post extends GetWidget<PostController> {
   var userImage;
@@ -55,8 +54,7 @@ class Post extends GetWidget<PostController> {
                     userImage: userImage,
                     userName: userName,
                     postTag: postTag,
-                    postDate: postDate
-                ),
+                    postDate: postDate),
                 // body post
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,8 +76,7 @@ class Post extends GetWidget<PostController> {
                             children: [
                               // Title
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 5, 0, 15),
+                                padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
                                 child: Text(
                                   postTitle,
                                   style: const TextStyle(
@@ -93,7 +90,8 @@ class Post extends GetWidget<PostController> {
                               // Text
                               (postText != "")
                                   ? (Padding(
-                                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 0, 0, 20),
                                       child: Text(
                                         postText,
                                         style: const TextStyle(
@@ -118,7 +116,8 @@ class Post extends GetWidget<PostController> {
                 ),
 
                 // Bottom
-                PostBottom(postVoted: postVoted, postAnswerCount: postAnswerCount)
+                PostBottom(
+                    postVoted: postVoted, postAnswerCount: postAnswerCount)
               ],
             ),
           ),
