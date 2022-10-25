@@ -36,8 +36,6 @@ class Post extends GetWidget<PostController> {
     fontSize: 10,
     fontWeight: FontWeight.normal,
   );
-  var upvoteColor = const Color(0xffffffff);
-  var downvoteColor = const Color(0xffffffff);
 
   @override
   Widget build(BuildContext context) {

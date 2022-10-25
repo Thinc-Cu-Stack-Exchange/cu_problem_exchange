@@ -106,7 +106,7 @@ class PostBottom extends GetWidget<PostBottomController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.postLiked.value = postVoted;
+    controller.voteController.upvotes.value = postVoted;
     return Container(
       color: const Color(0xffe897af),
       child: SizedBox(
@@ -120,26 +120,26 @@ class PostBottom extends GetWidget<PostBottomController> {
                 children: [
                   // Upvote icon
                   Obx(() => IconButton(
-                      onPressed: controller.onUpvotePressed,
+                      onPressed: controller.voteController.toggleUpvote,
                       icon: Icon(
                         Icons.arrow_upward_outlined,
                         size: 16,
-                        color: controller.upvoted.value
+                        color: controller.voteController.upvoted.value
                             ? const Color(0xff00B2FF)
                             : Colors.black,
                       ))),
                   // Liked post
                   Obx(() => Text(
-                        controller.totalPostLiked.toString(),
+                        controller.voteController.totalUpvotes.toString(),
                         style: bottomStyle,
                       )),
                   // Downvote icon
                   Obx(() => IconButton(
-                      onPressed: controller.onDownvotePressed,
+                      onPressed: controller.voteController.toggleDownvote,
                       icon: Icon(
                         Icons.arrow_downward_outlined,
                         size: 16,
-                        color: controller.downvoted.value
+                        color: controller.voteController.downvoted.value
                             ? const Color(0xffFF2A69)
                             : Colors.black,
                       )))
@@ -172,25 +172,30 @@ class PostBottom extends GetWidget<PostBottomController> {
   }
 }
 
-class PostBottomController extends GetxController {
-  var postLiked = 0.obs;
+class VoteController{
+  final upvotes = 0.obs;
   final upvoted = false.obs;
   final downvoted = false.obs;
 
-  int get totalPostLiked => postLiked.value + (upvoted.value ? 1 : 0) + (downvoted.value ? -1 : 0);
+  int get totalUpvotes => upvotes.value + (upvoted.value ? 1 : 0) + (downvoted.value ? -1 : 0);
 
-  void onCommentsPressed() {
-    Get.toNamed(RouteNames.mainPost);
-  }
-
-  void onUpvotePressed() {
+  void toggleUpvote(){
     downvoted.value = false;
     upvoted.value = !upvoted.value;
   }
 
-  void onDownvotePressed() {
+  void toggleDownvote(){
     upvoted.value = false;
     downvoted.value = !downvoted.value;
+  }
+}
+
+class PostBottomController extends GetxController {
+
+  final voteController = VoteController();
+
+  void onCommentsPressed() {
+    Get.toNamed(RouteNames.mainPost);
   }
 }
 

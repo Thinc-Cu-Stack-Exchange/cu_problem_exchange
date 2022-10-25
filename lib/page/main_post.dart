@@ -174,12 +174,15 @@ class MainPostBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => MainPostController());
+
+    // widget controllers
+    Get.create(() => AnswerController());
   }
 }
 
 class MainPostController extends GetxController {}
 
-class Answer extends StatelessWidget {
+class Answer extends GetWidget<AnswerController> {
   var userImg;
   String userName;
   String answerDate;
@@ -209,6 +212,7 @@ class Answer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.voteController.upvotes.value = answerVote;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: Column(
@@ -226,11 +230,14 @@ class Answer extends StatelessWidget {
                     height: 20,
                     child: FittedBox(
                       child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.keyboard_arrow_up_outlined,
-                            size: 30,
-                          )),
+                          onPressed: controller.voteController.toggleUpvote,
+                          icon: Obx(() => Icon(
+                                Icons.keyboard_arrow_up_outlined,
+                                color: controller.voteController.upvoted.value
+                                    ? const Color(0xff00B2FF)
+                                    : Colors.black,
+                                size: 30,
+                              ))),
                     ),
                   ),
                   Padding(
@@ -239,13 +246,13 @@ class Answer extends StatelessWidget {
                       width: 17,
                       child: Align(
                         alignment: Alignment.center,
-                        child: Text(
-                          answerVote.toString(),
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
-                          maxLines: 2,
-                        ),
+                        child: Obx(() => Text(
+                              controller.voteController.totalUpvotes.toString(),
+                              style: const TextStyle(
+                                fontSize: 10,
+                              ),
+                              maxLines: 2,
+                            )),
                       ),
                     ),
                   ),
@@ -254,11 +261,14 @@ class Answer extends StatelessWidget {
                     height: 20,
                     child: FittedBox(
                       child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            size: 30,
-                          )),
+                          onPressed: controller.voteController.toggleDownvote,
+                          icon: Obx(() => Icon(
+                                Icons.keyboard_arrow_down_outlined,
+                                color: controller.voteController.downvoted.value
+                                    ? const Color(0xffFF2A69)
+                                    : Colors.black,
+                                size: 30,
+                              ))),
                     ),
                   )
                 ],
@@ -316,7 +326,7 @@ class Answer extends StatelessWidget {
 
           // Comment Text
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
+            padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
             child: SizedBox(
               width: context.width - (2 * 15),
               child: Text(
@@ -350,18 +360,18 @@ class Answer extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0xffe897af),
+                  color: const Color(0xffe897af),
                   borderRadius: BorderRadius.circular(18),
                 ),
                 child: SizedBox(
                   height: 20,
                   child: ElevatedButton.icon(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.reply,
                       size: 15,
                     ),
-                    label: Text(
+                    label: const Text(
                       "Reply",
                       style: TextStyle(
                         color: Color(0xffffffff),
@@ -377,4 +387,8 @@ class Answer extends StatelessWidget {
       ),
     );
   }
+}
+
+class AnswerController extends GetxController {
+  final voteController = VoteController();
 }
