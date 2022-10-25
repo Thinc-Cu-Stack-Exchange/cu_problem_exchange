@@ -34,12 +34,6 @@ class ImagesView extends GetWidget<ImagesViewController> {
                         ),
                       ),
                     ]),
-                // PhotoView(
-                //   backgroundDecoration:
-                //   BoxDecoration(color: backgroundColor),
-                //   imageProvider: controller.imageList[index],
-                //   minScale: PhotoViewComputedScale.contained,
-                // )),
                 options: CarouselOptions(
                     viewportFraction: 1,
                     onPageChanged: controller.imagePageChanged)),
