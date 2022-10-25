@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateDrawer extends StatelessWidget {
@@ -37,15 +36,12 @@ class CreateDrawer extends StatelessWidget {
                   children: [
                     DrawerTag(
                       tagname: "tag1",
-                      deletableTag: true,
                     ),
                     DrawerTag(
                       tagname: "tag2 psls",
-                      deletableTag: true,
                     ),
                     DrawerTag(
                       tagname: "ooooooooooooooooooooooooooooooo",
-                      deletableTag: true,
                     ),
                   ],
                 ),
@@ -117,9 +113,7 @@ class DrawerTag extends StatelessWidget {
   final iconSize = 20.0;
   final double tagHeight = 30.0;
   final double frontMargin = 45;
-  final bool deletableTag;
-
-  DrawerTag({super.key, required this.tagname, this.deletableTag = false});
+  DrawerTag({super.key, required this.tagname});
 
   @override
   Widget build(BuildContext context) {
@@ -127,19 +121,9 @@ class DrawerTag extends StatelessWidget {
     return Row(
       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        (deletableTag)
-            ? IconButton(
-                onPressed: (){},
-                icon: Icon(
-                  Icons.delete,
-                  size: iconSize,
-                ))
-            : SizedBox(
-                height: iconSize,
-                width: 45,
-              ),
+        // Tag Text
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+          padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
           child: SizedBox(
             height: tagHeight,
             width: tagWidth,
