@@ -181,17 +181,14 @@ class MainPostBindings extends Bindings {
 class MainPostController extends GetxController {}
 
 class MainPostArguments {
-  final ImageProvider userImage; // = AssetImage("assets/sample_user.png");
-  final String postTag; // = "PassaThai";
-  final String
-      userName; // = "Poster1123456789234567823456789123456783456782345678";
-  final String postDate; // = "12/12/21";
-  final String
-      postTitle; // = "Possakarnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn";
-  final String postText; // = "PsLs \nPsLs \nPSLS \nssssssss";
-  final RxList<ImageProvider>
-      postImage; // = Image.asset("sample_image.jpg"); // optional
-  final int postVoted; // = 26;
+  final ImageProvider userImage;
+  final String postTag;
+  final String userName;
+  final String postDate;
+  final String postTitle;
+  final String postText;
+  final RxList<ImageProvider> postImage;
+  final int postVoted;
   final int postAnswerCount;
 
   MainPostArguments(
