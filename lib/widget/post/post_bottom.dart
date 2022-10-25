@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/vote_controller.dart';
+import '../../page/main_post.dart';
 import '../../route_names.dart';
 
 class PostBottom extends GetWidget<PostBottomController> {
   final int postVoted;
   final int postAnswerCount;
+  final MainPostArguments Function() createMainPostArguments;
   final bottomStyle = const TextStyle(
     color: Color(0xff000000),
     fontSize: 10,
@@ -14,11 +16,16 @@ class PostBottom extends GetWidget<PostBottomController> {
   );
 
   const PostBottom(
-      {super.key, required this.postVoted, required this.postAnswerCount});
+      {super.key,
+      required this.postVoted,
+      required this.postAnswerCount,
+        required this.createMainPostArguments});
 
   @override
   Widget build(BuildContext context) {
+    controller.createMainPostArguments = createMainPostArguments;
     controller.voteController.upvotes.value = postVoted;
+
     return Container(
       color: const Color(0xffe897af),
       child: SizedBox(
@@ -42,9 +49,9 @@ class PostBottom extends GetWidget<PostBottomController> {
                       ))),
                   // Liked post
                   Obx(() => Text(
-                    controller.voteController.totalUpvotes.toString(),
-                    style: bottomStyle,
-                  )),
+                        controller.voteController.totalUpvotes.toString(),
+                        style: bottomStyle,
+                      )),
                   // Downvote icon
                   Obx(() => IconButton(
                       onPressed: controller.voteController.toggleDownvote,
@@ -85,10 +92,10 @@ class PostBottom extends GetWidget<PostBottomController> {
 }
 
 class PostBottomController extends GetxController {
-
   final voteController = VoteController();
+  late MainPostArguments Function() createMainPostArguments;
 
   void onCommentsPressed() {
-    Get.toNamed(RouteNames.mainPost);
+    Get.toNamed(RouteNames.mainPost, arguments: createMainPostArguments());
   }
 }

@@ -129,7 +129,10 @@ class Post extends GetWidget<PostController> {
 
                 // Bottom
                 PostBottom(
-                    postVoted: postVoted, postAnswerCount: postAnswerCount)
+                  postVoted: postVoted,
+                  postAnswerCount: postAnswerCount,
+                  createMainPostArguments: controller.createMainPostArguments,
+                )
               ],
             ),
           ),
@@ -142,11 +145,7 @@ class Post extends GetWidget<PostController> {
 class PostController extends GetxController {
   late MainPostArguments Function() createMainPostArguments;
 
-  void commentPressed() {
-    Get.toNamed(RouteNames.mainPost, arguments: createMainPostArguments.call());
-  }
-
   void bodyPressed() {
-    Get.toNamed(RouteNames.mainPost, arguments: createMainPostArguments.call());
+    Get.toNamed(RouteNames.mainPost, arguments: createMainPostArguments());
   }
 }

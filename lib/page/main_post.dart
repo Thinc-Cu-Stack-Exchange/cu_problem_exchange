@@ -91,8 +91,10 @@ class MainPost extends GetView<MainPostController> {
                   ),
                   // bottom
                   PostBottom(
-                      postVoted: arguments.postVoted,
-                      postAnswerCount: arguments.postAnswerCount)
+                    postVoted: arguments.postVoted,
+                    postAnswerCount: arguments.postAnswerCount,
+                    createMainPostArguments: () => arguments,
+                  )
                 ],
               ),
             ),
