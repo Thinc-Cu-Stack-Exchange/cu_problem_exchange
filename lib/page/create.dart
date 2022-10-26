@@ -8,7 +8,8 @@ import '../route_names.dart';
 import '../widget/images_view.dart';
 
 class Create extends GetView<CreateController> {
-  const Create({super.key});
+  bool showSearchResult = true;
+  Create({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,12 @@ class Create extends GetView<CreateController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Clost Icon
                 IconButton(
                   icon: const Icon(Icons.close),
                   onPressed: controller.closePressed,
                 ),
+                // Next Button
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -41,30 +44,67 @@ class Create extends GetView<CreateController> {
                     child: ListView(
                       padding: const EdgeInsets.only(bottom: 10),
                       children: [
+                        // @Tag
                         TextField(
-                          controller: controller.titleController,
+                          controller: controller.tagController,
                           style: const TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Title',
+                            hintText: '@Tag',
                           ),
-                          maxLines: null,
+                          maxLines: 1,
+                          // onTap: () {
+                          //   showSearchResult = true;
+                          // },
                         ),
-                        TextField(
-                          controller: controller.contentController,
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.normal),
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Content',
-                          ),
-                          maxLines: null,
-                          keyboardType: TextInputType.multiline,
-                        ),
-                        ImagesView(
-                          imageList: controller.imageList,
-                          backgroundColor: context.theme.backgroundColor,
+
+                        // Title
+                        Stack(
+                          children: [
+                            Column(
+                              children: [
+                                TextField(
+                                  controller: controller.titleController,
+                                  style: const TextStyle(
+                                      fontSize: 21, fontWeight: FontWeight.bold),
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Title',
+                                  ),
+                                  maxLines: null,
+                                ),
+
+                                // Text
+                                TextField(
+                                  controller: controller.contentController,
+                                  style: const TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.normal),
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Content',
+                                  ),
+                                  maxLines: null,
+                                  keyboardType: TextInputType.multiline,
+                                ),
+
+                                // Image
+                                ImagesView(
+                                  imageList: controller.imageList,
+                                  backgroundColor: context.theme.backgroundColor,
+                                ),
+                              ],
+                            ),
+                            (showSearchResult) ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CreateSearchResult(result: "result1"),
+                                CreateSearchResult(result: "sugjjoigjoif"),
+                              ],
+                            ) : Container()
+
+
+                          ],
                         ),
                       ],
                     ))),
@@ -94,12 +134,14 @@ class Create extends GetView<CreateController> {
   }
 }
 
+
+
 class CreateController extends GetxController {
   final imageList = RxList<FileImage>();
 
   final titleController = TextEditingController();
   final contentController = TextEditingController();
-
+  final tagController = TextEditingController();
   final bottomSheet = const ImagePickerBottomSheet();
 
   void closePressed() {
@@ -127,10 +169,16 @@ class CreateController extends GetxController {
 
   @override
   void onClose() {
+    tagController.dispose();
     titleController.dispose();
     contentController.dispose();
     super.onClose();
   }
+
+  void editTag({required String result}) {
+    tagController.text = result;
+  }
+
 }
 
 class CreateBindings implements Bindings {
@@ -171,5 +219,39 @@ class ImagePickerBottomSheet extends StatelessWidget {
             ),
           ],
         ));
+  }
+}
+
+class CreateSearchResult extends StatelessWidget {
+  final String result;
+  CreateSearchResult({
+    super.key,
+    required this.result,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: SizedBox(
+        height: 40,
+        width: context.width*0.85,
+        child: TextButton(
+            onPressed: () => Get.find<CreateController>().editTag(result: result) ,
+            child: Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                result,
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black
+                ),
+                maxLines: 1,
+              ),
+            )
+        ),
+      ),
+    );
   }
 }

@@ -30,7 +30,7 @@ void main() => runApp(GetMaterialApp(
             binding: HomeBindings()),
         GetPage(
             name: RouteNames.create,
-            page: () => const Create(),
+            page: () => Create(),
             binding: CreateBindings()),
         GetPage(
             name: RouteNames.find, page: () => Find(), binding: FindBindings()),
