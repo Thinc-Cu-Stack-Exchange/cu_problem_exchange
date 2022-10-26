@@ -6,9 +6,9 @@ import 'package:image_picker/image_picker.dart';
 
 import '../route_names.dart';
 import '../widget/images_view.dart';
+import '../widget/keyboard_visibility.dart';
 
 class Create extends GetView<CreateController> {
-  bool showSearchResult = false;
   Create({super.key});
 
   @override
@@ -45,19 +45,31 @@ class Create extends GetView<CreateController> {
                       padding: const EdgeInsets.only(bottom: 10),
                       children: [
                         // @Tag
-                        TextField(
-                          controller: controller.tagController,
-                          style: const TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: '@Tag',
-                          ),
-                          maxLines: 1,
-                          // onTap: () {
-                          //   showSearchResult = true;
-                          // },
-                        ),
+                        KeyboardVisibilityBuilder(
+                            builder: (BuildContext context, Widget child,
+                                bool isKeyboardVisible) {
+                              if (!isKeyboardVisible) {
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  controller.showSearchResult.value = false;
+                                });
+                              }
+                              return child;
+                            },
+                            child: TextField(
+                              focusNode: controller.tagFocus,
+                              controller: controller.tagController,
+                              style: const TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: '@Tag',
+                              ),
+                              maxLines: 1,
+                              // onTap: () {
+                              //   showSearchResult = true;
+                              // },
+                            )),
 
                         // Title
                         Stack(
@@ -67,7 +79,8 @@ class Create extends GetView<CreateController> {
                                 TextField(
                                   controller: controller.titleController,
                                   style: const TextStyle(
-                                      fontSize: 21, fontWeight: FontWeight.bold),
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.bold),
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Title',
@@ -79,7 +92,8 @@ class Create extends GetView<CreateController> {
                                 TextField(
                                   controller: controller.contentController,
                                   style: const TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.normal),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal),
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Content',
@@ -91,19 +105,21 @@ class Create extends GetView<CreateController> {
                                 // Image
                                 ImagesView(
                                   imageList: controller.imageList,
-                                  backgroundColor: context.theme.backgroundColor,
+                                  backgroundColor:
+                                      context.theme.backgroundColor,
                                 ),
                               ],
                             ),
-                            (showSearchResult) ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CreateSearchResult(result: "result1"),
-                                CreateSearchResult(result: "sugjjoigjoif"),
-                              ],
-                            ) : Container()
-
-
+                            Obx(() => controller.showSearchResult.value
+                                ? Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CreateSearchResult(result: "Calculus 1"),
+                                      CreateSearchResult(result: "Physics 1"),
+                                    ],
+                                  )
+                                : Container())
                           ],
                         ),
                       ],
@@ -134,14 +150,16 @@ class Create extends GetView<CreateController> {
   }
 }
 
-
-
 class CreateController extends GetxController {
   final imageList = RxList<FileImage>();
+  final showSearchResult = false.obs;
 
   final titleController = TextEditingController();
   final contentController = TextEditingController();
   final tagController = TextEditingController();
+
+  final tagFocus = FocusNode();
+
   final bottomSheet = const ImagePickerBottomSheet();
 
   void closePressed() {
@@ -167,18 +185,36 @@ class CreateController extends GetxController {
     Get.back();
   }
 
+  void editTag({required String result}) {
+    tagController.text = result;
+    showSearchResult.value = false;
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    tagController.addListener(() {
+      showSearchResult.value = true;
+    });
+    showSearchResult.listen((val) {
+      if (!val) {
+        Get.focusScope?.unfocus();
+      }
+    });
+    tagFocus.addListener(() {
+      showSearchResult.value = tagFocus.hasFocus;
+      printInfo(info: "Focus is ${tagFocus.hasFocus}");
+    });
+  }
+
   @override
   void onClose() {
     tagController.dispose();
+    tagFocus.dispose();
     titleController.dispose();
     contentController.dispose();
     super.onClose();
   }
-
-  void editTag({required String result}) {
-    tagController.text = result;
-  }
-
 }
 
 class CreateBindings implements Bindings {
@@ -224,6 +260,7 @@ class ImagePickerBottomSheet extends StatelessWidget {
 
 class CreateSearchResult extends StatelessWidget {
   final String result;
+
   CreateSearchResult({
     super.key,
     required this.result,
@@ -235,22 +272,19 @@ class CreateSearchResult extends StatelessWidget {
       color: Colors.white,
       child: SizedBox(
         height: 40,
-        width: context.width*0.85,
+        width: context.width * 0.85,
         child: TextButton(
-            onPressed: () => Get.find<CreateController>().editTag(result: result) ,
+            onPressed: () =>
+                Get.find<CreateController>().editTag(result: result),
             child: Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 result,
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black
-                ),
+                style: TextStyle(fontSize: 15, color: Colors.black),
                 maxLines: 1,
               ),
-            )
-        ),
+            )),
       ),
     );
   }
