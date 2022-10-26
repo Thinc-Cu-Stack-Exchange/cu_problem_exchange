@@ -8,7 +8,7 @@ import '../route_names.dart';
 import '../widget/images_view.dart';
 
 class Create extends GetView<CreateController> {
-  bool showSearchResult = true;
+  bool showSearchResult = false;
   Create({super.key});
 
   @override
