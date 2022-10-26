@@ -27,10 +27,10 @@ class Home extends GetView<HomeController> {
             drawerWidth: drawerWidth,
 
           ),
-          bottomNavigationBar: const CustomBotBar(),
+          //bottomNavigationBar: const CustomBotBar(),
           backgroundColor: const Color(0xffE7E7E7),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: FloatingActionButton(
             onPressed: controller.createPressed,
             backgroundColor: const Color(0xffC78196),
